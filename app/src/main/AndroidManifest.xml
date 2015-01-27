@@ -8,12 +8,12 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.ui.MainActivity"
             android:label="@string/app_name" >
 
         </activity>
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.ui.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Education App"
             android:theme="@style/FullscreenTheme" >
