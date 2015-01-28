@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -143,8 +144,11 @@ public class MainActivity extends ActionBarActivity
             mProgressPieView.setOnProgressListener(new ProgressPieView.OnProgressListener() {
                 @Override
                 public void onProgressChanged(int progress, int max) {
+                   int counter=0; // for 10seconds
+                   if(progress%30==0){
+                       mProgressPieView.setText(""+progress/30+"s");
+                   }
 
-                    mProgressPieView.setText(progress + "%");
 
                     if (!mProgressPieView.isTextShowing()) {
                         mProgressPieView.setShowText(true);
@@ -168,6 +172,7 @@ public class MainActivity extends ActionBarActivity
                 @Override
                 public void onClick(View v) {
                     mProgressPieView.setProgress(0);
+                    mProgressPieView.setMax(300); // 30=1s
                     mProgressPieView.animateProgressFill();
                 }
             });
