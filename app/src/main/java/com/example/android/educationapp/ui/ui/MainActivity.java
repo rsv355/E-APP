@@ -12,9 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Button;
 
 import com.example.android.educationapp.R;
-
+import com.filippudak.ProgressPieView.ProgressPieView;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -27,6 +28,9 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    public static ProgressPieView mProgressPieView;
+    public static Button btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +135,45 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            btn = (Button)rootView.findViewById(R.id.btn);
+            mProgressPieView = (ProgressPieView)rootView. findViewById(R.id.progressPieView);
+
+
+            mProgressPieView.setOnProgressListener(new ProgressPieView.OnProgressListener() {
+                @Override
+                public void onProgressChanged(int progress, int max) {
+
+                    mProgressPieView.setText(progress + "%");
+
+                    if (!mProgressPieView.isTextShowing()) {
+                        mProgressPieView.setShowText(true);
+                        mProgressPieView.setShowImage(false);
+                    }
+                }
+
+                @Override
+                public void onProgressCompleted() {
+                    if (!mProgressPieView.isImageShowing()) {
+                        mProgressPieView.setShowImage(true);
+                    }
+                    mProgressPieView.setShowText(true);
+                    mProgressPieView.setText("Time's Up!!!");
+                    // mProgressPieView.setImageResource(R.drawable.ic_action_accept);
+                }
+            });
+
+
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mProgressPieView.setProgress(0);
+                    mProgressPieView.animateProgressFill();
+                }
+            });
+
+
+
             return rootView;
         }
 
