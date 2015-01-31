@@ -7,9 +7,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
-            android:name=".ui.ui.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".ui.base.MyDrawerActivity"
+            android:label="@string/app_name"
+            android:theme="@style/NoActionBarTheme">
+            >
 
         </activity>
         <activity

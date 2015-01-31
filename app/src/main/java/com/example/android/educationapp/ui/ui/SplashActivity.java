@@ -1,5 +1,6 @@
 package com.example.android.educationapp.ui.ui;
 
+import com.example.android.educationapp.ui.base.MyDrawerActivity;
 import com.example.android.educationapp.ui.util.SystemUiHider;
 
 import android.annotation.TargetApi;
@@ -167,7 +168,7 @@ public class SplashActivity extends Activity {
     View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            Intent i = new Intent(SplashActivity.this,MainActivity.class);
+            Intent i = new Intent(SplashActivity.this,MyDrawerActivity.class);
             startActivity(i);
             finish();
             return false;
