@@ -1,6 +1,7 @@
 package com.example.android.educationapp.ui.ui;
 
 import com.example.android.educationapp.R;
+import com.example.android.educationapp.ui.base.CircleMenuLayout;
 import com.example.android.educationapp.ui.base.MyDrawerActivity;
 import com.example.android.educationapp.ui.util.SystemUiHider;
 
@@ -19,7 +20,9 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -51,11 +54,20 @@ public class SplashActivity extends Activity {
      * The flags to pass to {@link SystemUiHider#getInstance}.
      */
     private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
-
+    FrameLayout fram_lay;
     /**
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
+
+    private CircleMenuLayout mCircleMenuLayout;
+
+    private String[] mItemTexts = new String[] { "Item 1 ", "Item 2", "Item 3",
+            "Item 4", "Item 5", "Item 6" };
+    private int[] mItemImgs = new int[] { R.drawable.home_mbank_1_normal,
+            R.drawable.home_mbank_2_normal, R.drawable.home_mbank_3_normal,
+            R.drawable.home_mbank_4_normal, R.drawable.home_mbank_5_normal,
+            R.drawable.home_mbank_6_normal };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +80,9 @@ public class SplashActivity extends Activity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/font name.ttf");
         tx.setTypeface(custom_font);
         tx.setText("Education \nApp1");*/
-        final View controlsView = findViewById(R.id.fullscreen_content_controls);
+      //  final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
-
+        fram_lay =(FrameLayout) findViewById(R.id.fram_lay);
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
         mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
@@ -90,20 +102,20 @@ public class SplashActivity extends Activity {
                             // in-layout UI controls at the bottom of the
                             // screen.
                             if (mControlsHeight == 0) {
-                                mControlsHeight = controlsView.getHeight();
+                             //   mControlsHeight = controlsView.getHeight();
                             }
                             if (mShortAnimTime == 0) {
                                 mShortAnimTime = getResources().getInteger(
                                         android.R.integer.config_shortAnimTime);
                             }
-                            controlsView.animate()
+                           /* controlsView.animate()
                                     .translationY(visible ? 0 : mControlsHeight)
-                                    .setDuration(mShortAnimTime);
+                                    .setDuration(mShortAnimTime);*/
                         } else {
                             // If the ViewPropertyAnimator APIs aren't
                             // available, simply show or hide the in-layout UI
                             // controls.
-                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
+                            //controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
                         }
 
                         if (visible && AUTO_HIDE) {
@@ -128,18 +140,43 @@ public class SplashActivity extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
       //  findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
         StartAnimations();
 
 
         CountDownTimer countDownTimer;
         countDownTimer = new MyCountDownTimer(3000, 1000); // 1000 = 1s
         countDownTimer.start();
+
+        mCircleMenuLayout = (CircleMenuLayout) findViewById(R.id.id_menulayout);
+        mCircleMenuLayout.setMenuItemIconsAndTexts(mItemImgs, mItemTexts);
+        mCircleMenuLayout.setOnMenuItemClickListener(new CircleMenuLayout.OnMenuItemClickListener()
+        {
+
+            @Override
+            public void itemClick(View view, int pos)
+            {
+                Toast.makeText(SplashActivity.this, mItemTexts[pos],
+                        Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void itemCenterClick(View view)
+            {
+                Toast.makeText(SplashActivity.this,
+                        "you can do something just like ccb  ",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     private void StartAnimations() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         anim.reset();
-        FrameLayout l=(FrameLayout) findViewById(R.id.lin_lay);
+        RelativeLayout l=(RelativeLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
         l.startAnimation(anim);
          anim = AnimationUtils.loadAnimation(this, R.anim.translate);
@@ -166,6 +203,7 @@ public class SplashActivity extends Activity {
         l.clearAnimation();
         l.startAnimation(anim);
 */
+        fram_lay.setVisibility(View.VISIBLE);
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.translate2);
         anim.reset();
         TextView tx1 = (TextView)findViewById(R.id.fullscreen_content);
