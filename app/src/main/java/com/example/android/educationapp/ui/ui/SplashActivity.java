@@ -193,7 +193,6 @@ public class SplashActivity extends Activity {
 
 
 
-
     }
 
     private void StartAnimations2() {
