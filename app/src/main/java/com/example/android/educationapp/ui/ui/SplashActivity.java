@@ -196,14 +196,7 @@ public class SplashActivity extends Activity {
 
     private void StartAnimations2() {
 
-      /*  Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        anim.reset();
-*/
-      /*  FrameLayout l=(FrameLayout) findViewById(R.id.lin_lay);
-        l.clearAnimation();
-        l.startAnimation(anim);
-*/
-        fram_lay.setVisibility(View.VISIBLE);
+
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.translate2);
         anim.reset();
         TextView tx1 = (TextView)findViewById(R.id.fullscreen_content);
@@ -219,10 +212,36 @@ public class SplashActivity extends Activity {
         tx.startAnimation(anim);
 
 
+        CountDownTimer countDownTimer;
+        countDownTimer = new MyCountDownTimer2(2000, 1000); // 1000 = 1s
+        countDownTimer.start();
 
 
     }
 
+    public class MyCountDownTimer2 extends CountDownTimer {
+
+        public MyCountDownTimer2(long startTime, long interval) {
+            super(startTime, interval);
+        }
+        @Override
+        public void onFinish() {
+            Log.e("counter", "Time's up!");
+            fram_lay.setVisibility(View.VISIBLE);
+            //  getActivity().finish();
+//            FragmentManager manager = getActivity().getSupportFragmentManager();
+//            FragmentTransaction ft = manager.beginTransaction();
+//            ft.setCustomAnimations(R.anim.entry, R.anim.exit,R.anim.entry, R.anim.exit);
+//            ft.replace(R.id.payment_fragment, new FragmentHome(), "payment_home");
+//            ft.commit();
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
+
+    }
     public class MyCountDownTimer extends CountDownTimer {
 
         public MyCountDownTimer(long startTime, long interval) {
