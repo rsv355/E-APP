@@ -213,7 +213,7 @@ public class SplashActivity extends Activity {
 
 
         CountDownTimer countDownTimer;
-        countDownTimer = new MyCountDownTimer2(2000, 1000); // 1000 = 1s
+        countDownTimer = new MyCountDownTimer2(2100, 1000); // 1000 = 1s
         countDownTimer.start();
 
 
