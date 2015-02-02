@@ -130,6 +130,7 @@ public class SplashActivity extends Activity {
       //  findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
         StartAnimations();
 
+
         CountDownTimer countDownTimer;
         countDownTimer = new MyCountDownTimer(3000, 1000); // 1000 = 1s
         countDownTimer.start();
