@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.android.educationapp.R;
+import com.example.android.educationapp.ui.base.CircleMenuLayout;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -24,7 +26,14 @@ public class FragmentHome extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private CircleMenuLayout mCircleMenuLayout;
 
+    private String[] mItemTexts = new String[] { "Item 1 ", "Item 2", "Item 3",
+            "Item 4", "Item 5", "Item 6" };
+    private int[] mItemImgs = new int[] { R.drawable.home_mbank_1_normal,
+            R.drawable.home_mbank_2_normal, R.drawable.home_mbank_3_normal,
+            R.drawable.home_mbank_4_normal, R.drawable.home_mbank_5_normal,
+            R.drawable.home_mbank_6_normal };
       /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -62,9 +71,31 @@ public class FragmentHome extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        mCircleMenuLayout = (CircleMenuLayout)rootView. findViewById(R.id.id_menulayout);
+        mCircleMenuLayout.setMenuItemIconsAndTexts(mItemImgs, mItemTexts);
+        mCircleMenuLayout.setOnMenuItemClickListener(new CircleMenuLayout.OnMenuItemClickListener()
+        {
+
+            @Override
+            public void itemClick(View view, int pos)
+            {
+                Toast.makeText(getActivity(), mItemTexts[pos],
+                        Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void itemCenterClick(View view)
+            {
+                Toast.makeText(getActivity(),
+                        "you can do something just like ccb  ",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
-       return rootView;
+        return rootView;
     }
 
 

@@ -140,7 +140,7 @@ public class SplashActivity extends Activity {
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/waltograph.ttf");
         tx.setTypeface(custom_font);
-        tx.setText("Education \nApp");
+        tx.setText("Quick Quiz");
         tx.clearAnimation();
         tx.startAnimation(anim);
 

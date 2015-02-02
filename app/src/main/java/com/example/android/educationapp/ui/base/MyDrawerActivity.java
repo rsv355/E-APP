@@ -58,7 +58,7 @@ public class MyDrawerActivity extends ActionBarActivity {
         initView();
 
         if (toolbar != null) {
-            toolbar.setTitle("Education App");
+            toolbar.setTitle("Quick Quiz");
             setSupportActionBar(toolbar);
         }
         initDrawer();
