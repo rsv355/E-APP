@@ -1,5 +1,6 @@
 package com.example.android.educationapp.ui.ui;
 
+import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.MyDrawerActivity;
 import com.example.android.educationapp.ui.util.SystemUiHider;
 
@@ -14,12 +15,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.android.educationapp.R;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -58,8 +59,9 @@ public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
 
        /* TextView tx = (TextView)findViewById(R.id.fullscreen_content);
@@ -126,7 +128,7 @@ public class SplashActivity extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+      //  findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
         StartAnimations();
 
         CountDownTimer countDownTimer;
