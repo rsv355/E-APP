@@ -182,9 +182,11 @@ public class SplashActivity extends Activity {
          anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
         TextView tx = (TextView)findViewById(R.id.fullscreen_content);
+        TextView download = (TextView)findViewById(R.id.downloading);
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/waltograph.ttf");
         tx.setTypeface(custom_font);
+        download.setTypeface(custom_font);
         tx.setText("Quick Quiz");
         tx.clearAnimation();
         tx.startAnimation(anim);
@@ -201,6 +203,10 @@ public class SplashActivity extends Activity {
         anim.reset();
         TextView tx1 = (TextView)findViewById(R.id.fullscreen_content);
         tx1.setVisibility(View.GONE);
+
+        TextView download = (TextView)findViewById(R.id.downloading);
+        download.setVisibility(View.GONE);
+
 
         TextView tx = (TextView)findViewById(R.id.fullscreen_content2);
         tx.setVisibility(View.VISIBLE);

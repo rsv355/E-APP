@@ -27,6 +27,17 @@
         android:textSize="50sp"
         android:gravity="center"
         android:text="Quick \nQuiz" />
+    <TextView
+        android:id="@+id/downloading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:keepScreenOn="true"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="10dp"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:text="downloading..." />
 
 
     <!-- This FrameLayout insets its children based on system windows using
