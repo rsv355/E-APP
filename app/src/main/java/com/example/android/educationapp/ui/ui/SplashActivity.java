@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -126,6 +128,10 @@ public class SplashActivity extends Activity {
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
         StartAnimations();
+
+        CountDownTimer countDownTimer;
+        countDownTimer = new MyCountDownTimer(3000, 1000); // 1000 = 1s
+        countDownTimer.start();
     }
 
     private void StartAnimations() {
@@ -146,6 +152,58 @@ public class SplashActivity extends Activity {
 
 
 
+
+    }
+
+    private void StartAnimations2() {
+
+      /*  Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        anim.reset();
+*/
+      /*  FrameLayout l=(FrameLayout) findViewById(R.id.lin_lay);
+        l.clearAnimation();
+        l.startAnimation(anim);
+*/
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.translate2);
+        anim.reset();
+        TextView tx1 = (TextView)findViewById(R.id.fullscreen_content);
+        tx1.setVisibility(View.GONE);
+
+        TextView tx = (TextView)findViewById(R.id.fullscreen_content2);
+        tx.setVisibility(View.VISIBLE);
+
+        Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/waltograph.ttf");
+        tx.setTypeface(custom_font);
+        tx.setText("Quick Quiz");
+        tx.clearAnimation();
+        tx.startAnimation(anim);
+
+
+
+
+    }
+
+    public class MyCountDownTimer extends CountDownTimer {
+
+        public MyCountDownTimer(long startTime, long interval) {
+            super(startTime, interval);
+        }
+        @Override
+        public void onFinish() {
+            Log.e("counter", "Time's up!");
+            StartAnimations2();
+          //  getActivity().finish();
+//            FragmentManager manager = getActivity().getSupportFragmentManager();
+//            FragmentTransaction ft = manager.beginTransaction();
+//            ft.setCustomAnimations(R.anim.entry, R.anim.exit,R.anim.entry, R.anim.exit);
+//            ft.replace(R.id.payment_fragment, new FragmentHome(), "payment_home");
+//            ft.commit();
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
 
     }
 

@@ -7,7 +7,16 @@
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-
+    <TextView
+        android:id="@+id/fullscreen_content2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:keepScreenOn="true"
+        android:textColor="#fff"
+        android:textSize="50sp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="Quick \nQuiz" />
 
     <TextView
         android:id="@+id/fullscreen_content"
