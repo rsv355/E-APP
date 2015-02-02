@@ -18,7 +18,7 @@
         <activity
             android:name=".ui.ui.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="Education App"
+            android:label="Quick Quiz"
             android:theme="@style/FullscreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
