@@ -1,6 +1,7 @@
 package com.example.android.educationapp.ui.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -79,6 +80,15 @@ public class FragmentHome extends Fragment {
             @Override
             public void itemClick(View view, int pos)
             {
+
+
+                  if(pos==1)
+                  {
+                        Intent i = new Intent(getActivity(),CreateTodo.class);
+                        startActivity(i);
+
+                }
+
                 Toast.makeText(getActivity(), mItemTexts[pos],
                         Toast.LENGTH_SHORT).show();
 
@@ -87,9 +97,11 @@ public class FragmentHome extends Fragment {
             @Override
             public void itemCenterClick(View view)
             {
-                Toast.makeText(getActivity(),
+                /*Toast.makeText(getActivity(),
                         "you can do something just like ccb  ",
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();*/
+                Intent i = new Intent(getActivity(),CreateTodo.class);
+                startActivity(i);
 
             }
         });

@@ -77,9 +77,11 @@ public class SplashActivity extends Activity {
             @Override
             public void itemCenterClick(View view)
             {
-                Toast.makeText(SplashActivity.this,
+               /* Toast.makeText(SplashActivity.this,
                         "you can do something just like ccb  ",
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();*/
+                Intent i = new Intent(SplashActivity.this,ToDoListActivity.class);
+                startActivity(i);
 
             }
         });
