@@ -1,5 +1,6 @@
 package com.example.android.educationapp.ui.ui;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -32,6 +33,7 @@ import java.util.List;
 public class QuestionActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private ListView listview;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +67,9 @@ public class QuestionActivity extends ActionBarActivity {
 
     }
 
-
     public void viewdata() {
+
+        dialog = ProgressDialog.show(QuestionActivity.this,"Please Wait","Fetching data from server..",true);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
 
@@ -75,14 +78,13 @@ public class QuestionActivity extends ActionBarActivity {
             @Override
             public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
 
+                dialog.dismiss();
+
                 if (e == null) {
                     Log.e("size of list", String.valueOf(parseObjects.size()));
 
-                    for(int i=0;i<parseObjects.size();i++) {
-                        Log.e("value", String.valueOf(parseObjects.get(i).getString("playerName")));
-                    }
 
-                    Myadapter adapter = new Myadapter(QuestionActivity.this, android.R.layout.simple_list_item_1, parseObjects);
+                    Myadapter adapter = new Myadapter(QuestionActivity.this, parseObjects);
                     listview.setAdapter(adapter);
                 } else {
                     Log.e("size of exception", e.getMessage());
@@ -92,21 +94,36 @@ public class QuestionActivity extends ActionBarActivity {
         });
     }
 
-   public class Myadapter extends ArrayAdapter<ParseObject> {
+   public class Myadapter extends BaseAdapter{
 
          Context context;
          int layoutResourceId;
          List<ParseObject> values;
 
-         public Myadapter(Context context, int resource, List<ParseObject> objects) {
-             super(context, resource);
+         public Myadapter(Context context,List<ParseObject> objects) {
              this.context = context;
              this.values=objects;
 
              Log.e("inside", "adapter");
          }
 
-         @Override
+
+       @Override
+       public int getCount() {
+           return values.size();
+       }
+
+       @Override
+       public Object getItem(int position) {
+           return null;
+       }
+
+       @Override
+       public long getItemId(int position) {
+           return position;
+       }
+
+       @Override
          public View getView(final int position, View convertView, ViewGroup parent) {
 
              Log.e("inside", "getview");
