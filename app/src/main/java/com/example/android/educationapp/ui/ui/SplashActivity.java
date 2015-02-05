@@ -2,7 +2,7 @@ package com.example.android.educationapp.ui.ui;
 
 import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.CircleMenuLayout;
-import com.example.android.educationapp.ui.base.MyDrawerActivity;
+
 import com.example.android.educationapp.ui.util.SystemUiHider;
 
 import android.annotation.TargetApi;
@@ -80,7 +80,7 @@ public class SplashActivity extends Activity {
                /* Toast.makeText(SplashActivity.this,
                         "you can do something just like ccb  ",
                         Toast.LENGTH_SHORT).show();*/
-                Intent i = new Intent(SplashActivity.this,ToDoListActivity.class);
+                Intent i = new Intent(SplashActivity.this,MainActivity.class);
                 startActivity(i);
 
             }
