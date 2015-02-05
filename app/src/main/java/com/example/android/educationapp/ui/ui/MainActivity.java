@@ -1,5 +1,6 @@
 package com.example.android.educationapp.ui.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btn = (Button)findViewById(R.id.btn);
+        Button btn2 = (Button)findViewById(R.id.btn2);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Color.parseColor("#3D3427"));
@@ -39,6 +41,14 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,QuestionActivity.class);
+                startActivity(i);
+            }
+        });
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
