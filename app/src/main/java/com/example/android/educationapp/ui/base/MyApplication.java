@@ -24,17 +24,5 @@ public class MyApplication extends Application{
 
         ParseACL.setDefaultACL(defaultACL, true);
 
-       /* ParsePush.subscribeInBackground("", new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.e("com.parse.push", "successfully subscribed to the broadcast channel.");
-                } else {
-                    Log.e("com.parse.push", "failed to subscribe for push", e);
-                }
-            }
-        });*/
-        // Specify an Activity to handle all pushes by default.
-      //  PushService.setDefaultPushCallback(this, LoginActivity.class);
     }
 }
