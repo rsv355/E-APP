@@ -17,6 +17,7 @@ import com.parse.ParseObject;
 
 public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
+    net.qiujuer.genius.widget.GeniusCheckBox a,b,c,d;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,47 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                finish();
+            }
+        });
+
+        a = (net.qiujuer.genius.widget.GeniusCheckBox)findViewById(R.id.a);
+        b = (net.qiujuer.genius.widget.GeniusCheckBox)findViewById(R.id.b);
+        c = (net.qiujuer.genius.widget.GeniusCheckBox)findViewById(R.id.c);
+        d = (net.qiujuer.genius.widget.GeniusCheckBox)findViewById(R.id.d);
+
+
+
+
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b.setChecked(false);
+                c.setChecked(false);
+                d.setChecked(false);
+            }
+        });
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                a.setChecked(false);
+                c.setChecked(false);
+                d.setChecked(false);
+            }
+        });
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b.setChecked(false);
+                a.setChecked(false);
+                d.setChecked(false);
+            }
+        });
+        d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b.setChecked(false);
+                c.setChecked(false);
+                a.setChecked(false);
             }
         });
 
