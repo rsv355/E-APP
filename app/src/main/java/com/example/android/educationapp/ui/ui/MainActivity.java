@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.android.educationapp.R;
 import com.parse.ParseObject;
 
+import net.qiujuer.genius.Genius;
+
 
 public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
@@ -28,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Color.parseColor("#3D3427"));
         toolbar.setNavigationIcon(R.drawable.icon_back);
+
 
 
         if (toolbar != null) {

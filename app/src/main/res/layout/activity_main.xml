@@ -32,6 +32,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        genius:g_theme="@array/Sandstone"
         genius:g_ringWidth="2dp"
         genius:g_circleRadius="22dp"
         genius:g_checked="false"
@@ -43,6 +44,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         genius:g_ringWidth="2dp"
+        genius:g_theme="@array/StrawberryIce"
         genius:g_circleRadius="22dp"
         genius:g_checked="false"
         genius:g_enabled="true" />
@@ -53,6 +55,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         genius:g_ringWidth="2dp"
+        genius:g_theme="@array/ClassicBlue"
         genius:g_circleRadius="22dp"
         genius:g_checked="false"
         genius:g_enabled="true" />
@@ -62,6 +65,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        genius:g_theme="@array/Treetop"
         genius:g_ringWidth="2dp"
         genius:g_circleRadius="22dp"
         genius:g_checked="false"
