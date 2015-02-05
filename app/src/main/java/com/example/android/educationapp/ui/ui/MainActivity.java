@@ -1,7 +1,9 @@
 package com.example.android.educationapp.ui.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,13 +15,29 @@ import com.parse.ParseObject;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btn = (Button)findViewById(R.id.btn);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(Color.parseColor("#3D3427"));
+        toolbar.setNavigationIcon(R.drawable.icon_back);
+
+
+        if (toolbar != null) {
+            toolbar.setTitle("Quick Quiz");
+            setSupportActionBar(toolbar);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               finish();
+            }
+        });
 
 
         btn.setOnClickListener(new View.OnClickListener() {
