@@ -24,5 +24,7 @@ public class MyApplication extends Application{
 
         ParseACL.setDefaultACL(defaultACL, true);
 
+
+
     }
 }
