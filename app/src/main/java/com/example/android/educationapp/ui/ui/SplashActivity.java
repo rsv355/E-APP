@@ -192,6 +192,13 @@ public class SplashActivity extends Activity {
 
     }
 
+private void processStart2(){
+
+    CountDownTimer countDownTimer;
+    countDownTimer = new MyCountDownTimer(2100, 1000); // 1000 = 1s
+    countDownTimer.start();
+}
+
 
   private void fetchQuestionMaster(){
      //   dialog = ProgressDialog.show(SplashActivity.this, "Please Wait", "Fetching data from server..", true);
@@ -211,7 +218,7 @@ public class SplashActivity extends Activity {
                     Prefs.putString("TestID", String.valueOf(parseObjects.get(0).get("Test_id")));
                     Prefs.putString("Password",String.valueOf(parseObjects.get(0).get("Password")));
 
-                    StartAnimations2();
+                    processStart2();
 
 
                 } else {

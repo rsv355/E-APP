@@ -118,12 +118,13 @@ public class StartTestActivity extends ActionBarActivity {
 
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
+            txtCounter.setVisibility(View.VISIBLE);
             fetchQuestiondetails();
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
-            txtCounter.setText(""+millisUntilFinished/1000);
+                txtCounter.setText(""+millisUntilFinished/1000);
         }
 
         @Override
