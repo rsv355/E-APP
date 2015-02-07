@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.educationapp.R;
+import com.example.android.educationapp.ui.base.ComplexPreferences;
+import com.example.android.educationapp.ui.base.QuestionDetails;
 import com.parse.FindCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -150,6 +152,11 @@ public class StartTestActivity extends ActionBarActivity {
                     for (int i = 0; i < parseObjects.size(); i++)
                     {
                         Log.e("quesiotn", String.valueOf(((ParseObject)parseObjects.get(i)).get("Question")));
+
+                        ComplexPreferences complexPreferences1 = ComplexPreferences.getComplexPreferences(StartTestActivity.this, "user_pref", 0);
+                        QuestionDetails temp_user = complexPreferences1.getObject("current_user", QuestionDetails.class);
+
+
                     }
                 } else {
                     Log.e("size of exception", e.getMessage());
