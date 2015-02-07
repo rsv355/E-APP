@@ -5,9 +5,10 @@ import android.app.Application;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
+import com.pixplicity.easyprefs.library.Prefs;
 
 /**
- * Created by nirav kalola on 2/1/2015.
+ * Created by krishn on 2/1/2015.
  */
 public class MyApplication extends Application{
     static final String TAG = "MyApp";
@@ -26,6 +27,8 @@ public class MyApplication extends Application{
 
 
 
+        // intializing the Shared prefernces
+        Prefs.initPrefs(this);
 
     }
 }

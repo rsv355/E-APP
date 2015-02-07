@@ -4,9 +4,14 @@ import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.CircleMenuLayout;
 
 import com.example.android.educationapp.ui.util.SystemUiHider;
+import com.parse.FindCallback;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.pixplicity.easyprefs.library.Prefs;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -24,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -34,6 +41,7 @@ import android.widget.Toast;
 public class SplashActivity extends Activity {
 
      FrameLayout fram_lay;
+    ProgressDialog dialog;
 
     private CircleMenuLayout mCircleMenuLayout;
 
@@ -54,12 +62,14 @@ public class SplashActivity extends Activity {
          final View contentView = findViewById(R.id.fullscreen_content);
         fram_lay =(FrameLayout) findViewById(R.id.fram_lay);
 
+
+
         StartAnimations();
 
-
+/*
         CountDownTimer countDownTimer;
         countDownTimer = new MyCountDownTimer(3000, 1000); // 1000 = 1s
-        countDownTimer.start();
+        countDownTimer.start();*/
 
         mCircleMenuLayout = (CircleMenuLayout) findViewById(R.id.id_menulayout);
         mCircleMenuLayout.setMenuItemIconsAndTexts(mItemImgs, mItemTexts);
@@ -80,7 +90,7 @@ public class SplashActivity extends Activity {
                /* Toast.makeText(SplashActivity.this,
                         "you can do something just like ccb  ",
                         Toast.LENGTH_SHORT).show();*/
-                Intent i = new Intent(SplashActivity.this,MainActivity.class);
+                Intent i = new Intent(SplashActivity.this,StartTestActivity.class);
                 startActivity(i);
 
             }
@@ -107,6 +117,7 @@ public class SplashActivity extends Activity {
         tx.startAnimation(anim);
 
 
+        fetchQuestionMaster();
 
     }
 
@@ -182,6 +193,35 @@ public class SplashActivity extends Activity {
     }
 
 
+  private void fetchQuestionMaster(){
+     //   dialog = ProgressDialog.show(SplashActivity.this, "Please Wait", "Fetching data from server..", true);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Question_master");
+        query.whereEqualTo("IsActive", true);
+        query.findInBackground(new FindCallback<ParseObject>() {
+
+            @Override
+            public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
+
+        //        dialog.dismiss();
+
+                if (e == null) {
+                    Log.e("size of list", String.valueOf(parseObjects.size()));
+                    //Toast.makeText(StartTestActivity.this, String.valueOf(parseObjects.get(i).get("Test_id")), Toast.LENGTH_LONG).show();
+                    Prefs.putString("TestID", String.valueOf(parseObjects.get(0).get("Test_id")));
+                    Prefs.putString("Password",String.valueOf(parseObjects.get(0).get("Password")));
+
+                    StartAnimations2();
+
+
+                } else {
+                    Log.e("size of exception", e.getMessage());
+                    Toast.makeText(SplashActivity.this, "Error While downloading the data !!!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        });
+    }
 
 
 }

@@ -23,9 +23,13 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.ui.QuestionActivity"
-            android:label="Quick Quiz" >
+            android:label="Quick Quiz" ></activity>
 
-        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.ui.StartTestActivity"
+            android:label="Quick Quiz" ></activity>
+
 
         <activity
             android:screenOrientation="portrait"
