@@ -47,6 +47,7 @@ public class StartTestActivity extends ActionBarActivity {
 
         etTestid = (EditText)findViewById(R.id.etTestid);
         etPassword = (EditText)findViewById(R.id.etPassword);
+        txtCounter = (TextView)findViewById(R.id.txtCounter);
 
         btnStart= (GeniusButton)findViewById(R.id.btnStart);
 
