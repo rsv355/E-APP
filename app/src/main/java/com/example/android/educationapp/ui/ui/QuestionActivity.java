@@ -101,11 +101,20 @@ public class QuestionActivity extends ActionBarActivity {
                  convertView = QuestionActivity.this.getLayoutInflater().inflate(R.layout.question_activity,null);
              }
 
-             TextView txtTitle = (TextView) convertView.findViewById(R.id.txtTitle);
-             TextView txtTitle2 = (TextView) convertView.findViewById(R.id.txtTitle2);
+           TextView txtno = (TextView) convertView.findViewById(R.id.txtQno);
 
-             txtTitle.setText(values.get(position).Question);
-             txtTitle2.setText("   "+values.get(position).Correct_opt);
+             TextView txtQuestion = (TextView) convertView.findViewById(R.id.txtQuestion);
+             TextView txtOptA = (TextView) convertView.findViewById(R.id.txtOptA);
+             TextView txtOptB = (TextView) convertView.findViewById(R.id.txtOptB);
+             TextView txtOptC = (TextView) convertView.findViewById(R.id.txtOptC);
+             TextView txtOptD = (TextView) convertView.findViewById(R.id.txtOptD);
+
+           txtQuestion.setText(""+position+1);
+           txtQuestion.setText(values.get(position).Question);
+           txtOptA.setText("   "+values.get(position).optA);
+           txtOptB.setText("   "+values.get(position).optB);
+           txtOptC.setText("   "+values.get(position).optC);
+           txtOptD.setText("   "+values.get(position).optD);
              //Log.e("value", String.valueOf(values.get(position).getString("playerName")));
 
              return  convertView;
