@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.QuestionDetails;
@@ -23,7 +24,9 @@ public class QuestionActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private ListView listview;
     ProgressDialog dialog;
+    net.qiujuer.genius.widget.GeniusButton btnNext;
     private ArrayList<QuestionDetails> Ques_det;
+    int counter=0;
 
 
     @Override
@@ -32,7 +35,7 @@ public class QuestionActivity extends ActionBarActivity {
         setContentView(R.layout.activity_question);
 
         listview = (ListView) findViewById(R.id.listview);
-
+        btnNext = (net.qiujuer.genius.widget.GeniusButton)findViewById(R.id.btnNext);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Color.parseColor("#3D3427"));
         toolbar.setNavigationIcon(R.drawable.icon_back);
@@ -50,7 +53,21 @@ public class QuestionActivity extends ActionBarActivity {
             }
         });
 
-        viewdata();
+        viewdata(StartTestActivity.Ques_det);
+
+        checkQuestionNo(counter);
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 counter+=1;
+                if(counter>=StartTestActivity.Ques_det.size()){
+                    Toast.makeText(QuestionActivity.this,"Questions are finished :)",Toast.LENGTH_LONG).show();
+                }else {
+                    checkQuestionNo(counter);
+                }
+            }
+        });
 
 
 
@@ -59,11 +76,22 @@ public class QuestionActivity extends ActionBarActivity {
     }
 
 
+    public void checkQuestionNo(final int qno ){
+        ArrayList<QuestionDetails> newObj = new ArrayList<QuestionDetails>(1);
+        newObj.add(StartTestActivity.Ques_det.get(counter));
+        viewdata(newObj);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        counter=0;
+    }
 
-    public void viewdata() {
-        Myadapter adapter = new Myadapter(QuestionActivity.this,StartTestActivity.Ques_det);
+    public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
+        Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
         listview.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
    public class Myadapter extends BaseAdapter{
@@ -72,7 +100,7 @@ public class QuestionActivity extends ActionBarActivity {
          int layoutResourceId;
          ArrayList<QuestionDetails> values;
 
-         public Myadapter(Context context,ArrayList<QuestionDetails> objects) {
+         public Myadapter(Context context,ArrayList<QuestionDetails> objects,final int counter) {
              this.context = context;
              this.values=objects;
 
@@ -98,7 +126,7 @@ public class QuestionActivity extends ActionBarActivity {
        @Override
          public View getView(final int position, View convertView, ViewGroup parent) {
              if(convertView == null){
-                 convertView = QuestionActivity.this.getLayoutInflater().inflate(R.layout.question_activity,null);
+                 convertView = QuestionActivity.this.getLayoutInflater().inflate(R.layout.items_question_activity,null);
              }
 
            TextView txtno = (TextView) convertView.findViewById(R.id.txtQno);
@@ -109,7 +137,7 @@ public class QuestionActivity extends ActionBarActivity {
              TextView txtOptC = (TextView) convertView.findViewById(R.id.txtOptC);
              TextView txtOptD = (TextView) convertView.findViewById(R.id.txtOptD);
 
-           txtno.setText(String.valueOf(position+1));
+           txtno.setText(String.valueOf(counter+1));
            txtQuestion.setText(values.get(position).Question);
            txtOptA.setText("   "+values.get(position).optA);
            txtOptB.setText("   "+values.get(position).optB);
