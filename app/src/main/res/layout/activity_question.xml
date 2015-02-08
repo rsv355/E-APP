@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:genius="http://schemas.android.com/apk/res-auto"
+    xmlns:ppv="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
    tools:context=".MainActivity">
 
@@ -26,10 +27,21 @@
 
     </LinearLayout>
 
+    <com.filippudak.ProgressPieView.ProgressPieView
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/progressPieViewXml"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="80dp"
+        android:textColor="@color/paylabas_white"
+        android:textSize="18sp"
+        ppv:ppvInverted="true"
+        android:text="Xml"/>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/progressPieViewXml"
         android:layout_above="@id/linearBottom"
         android:layout_height="match_parent"
         android:id="@+id/listview"></ListView>

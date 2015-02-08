@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.QuestionDetails;
+import com.filippudak.ProgressPieView.ProgressPieView;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class QuestionActivity extends ActionBarActivity {
     private ListView listview;
     ProgressDialog dialog;
     net.qiujuer.genius.widget.GeniusButton btnNext;
+    com.filippudak.ProgressPieView.ProgressPieView pieView;
     private ArrayList<QuestionDetails> Ques_det;
     int counter=0;
 
@@ -34,6 +36,8 @@ public class QuestionActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+
+        pieView = (com.filippudak.ProgressPieView.ProgressPieView) findViewById(R.id.progressPieViewXml);
         listview = (ListView) findViewById(R.id.listview);
         btnNext = (net.qiujuer.genius.widget.GeniusButton)findViewById(R.id.btnNext);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -70,7 +74,20 @@ public class QuestionActivity extends ActionBarActivity {
         });
 
 
+        pieView.setProgress(100);
 
+        pieView.setOnProgressListener(new ProgressPieView.OnProgressListener() {
+            @Override
+            public void onProgressChanged(int progress, int max) {
+                pieView.setShowText(true);
+                pieView.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onProgressCompleted() {
+
+            }
+        });
 
 
     }
@@ -92,6 +109,7 @@ public class QuestionActivity extends ActionBarActivity {
         Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
         listview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
     }
 
    public class Myadapter extends BaseAdapter{
