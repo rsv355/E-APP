@@ -1,12 +1,14 @@
 package com.example.android.educationapp.ui.base;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -62,6 +64,50 @@ public class ComplexPreferences {
 
         editor.putString(key, GSON.toJson(object));
     }
+
+
+    public void putQuestionDetailsObject(String key, ArrayList<QuestionDetails> object) {
+        if(object == null){
+            throw new IllegalArgumentException("object is null");
+        }
+
+        if(key.equals("") || key == null){
+            throw new IllegalArgumentException("key is empty or null");
+        }
+        editor.putString(key, GSON.toJson(object));
+    }
+
+   // SharedPreferences appSharedPrefs = PreferenceManager  .getDefaultSharedPreferences(this.getApplicationContext());
+   // Editor prefsEditor = appSharedPrefs.edit();
+   // Gson gson = new Gson();
+   // String json = appSharedPrefs.getString("MyObject", "");
+    //Student mStudentObject = gson.fromJson(json, Student.class);
+
+
+
+
+
+
+    public <T> QuestionDetails getQuestionDetailsObject(String key, Class<T> a) {
+
+        String gson = preferences.getString(key, null);
+        if (gson == null) {
+            return null;
+        } else {
+            try{
+               QuestionDetails Object = GSON.fromJson(gson, QuestionDetails.class);
+               ArrayList<QuestionDetails> qd ;
+
+                Log.e("save","obj in copmplex");
+               return Object;
+               // return GSON.fromJson(gson, a);
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Object storaged with key " + key + " is instanceof other class");
+            }
+        }
+    }
+
+
 
 
     public void remove(String objName){

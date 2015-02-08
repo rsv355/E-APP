@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.educationapp.R;
+import com.example.android.educationapp.ui.base.ComplexPreferences;
+import com.example.android.educationapp.ui.base.QuestionDetails;
 import com.example.android.educationapp.ui.base.QuestionMaster;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -28,12 +30,15 @@ import com.parse.ParseQuery;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 
 public class QuestionActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private ListView listview;
     ProgressDialog dialog;
+    private ArrayList<QuestionDetails> Ques_det;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,40 +72,21 @@ public class QuestionActivity extends ActionBarActivity {
 
     }
 
+
+
+
     public void viewdata() {
-
-        dialog = ProgressDialog.show(QuestionActivity.this,"Please Wait","Fetching data from server..",true);
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
-
-        query.findInBackground(new FindCallback<ParseObject>() {
-
-            @Override
-            public void done(List<ParseObject> parseObjects, com.parse.ParseException e) {
-
-                dialog.dismiss();
-
-                if (e == null) {
-                    Log.e("size of list", String.valueOf(parseObjects.size()));
-
-
-                    Myadapter adapter = new Myadapter(QuestionActivity.this, parseObjects);
-                    listview.setAdapter(adapter);
-                } else {
-                    Log.e("size of exception", e.getMessage());
-                }
-            }
-
-        });
+        Myadapter adapter = new Myadapter(QuestionActivity.this,StartTestActivity.Ques_det);
+        listview.setAdapter(adapter);
     }
 
    public class Myadapter extends BaseAdapter{
 
          Context context;
          int layoutResourceId;
-         List<ParseObject> values;
+         ArrayList<QuestionDetails> values;
 
-         public Myadapter(Context context,List<ParseObject> objects) {
+         public Myadapter(Context context,ArrayList<QuestionDetails> objects) {
              this.context = context;
              this.values=objects;
 
@@ -125,16 +111,16 @@ public class QuestionActivity extends ActionBarActivity {
 
        @Override
          public View getView(final int position, View convertView, ViewGroup parent) {
-
-             Log.e("inside", "getview");
-
              if(convertView == null){
                  convertView = QuestionActivity.this.getLayoutInflater().inflate(R.layout.item_pickup_points,null);
              }
 
              TextView txtTitle = (TextView) convertView.findViewById(R.id.txtTitle);
-             txtTitle.setText(values.get(position).getString("playerName"));
-             Log.e("value", String.valueOf(values.get(position).getString("playerName")));
+             TextView txtTitle2 = (TextView) convertView.findViewById(R.id.txtTitle2);
+
+             txtTitle.setText(values.get(position).Question);
+             txtTitle2.setText("   "+values.get(position).Correct_opt);
+             //Log.e("value", String.valueOf(values.get(position).getString("playerName")));
 
              return  convertView;
          }

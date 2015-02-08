@@ -25,6 +25,7 @@ import com.pixplicity.easyprefs.library.Prefs;
 
 import net.qiujuer.genius.widget.GeniusButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,6 +37,9 @@ public class StartTestActivity extends ActionBarActivity {
     private EditText etTestid;
     private ListView listview;
     private TextView txtCounter;
+    private QuestionDetails ques_d;
+    public static ArrayList<QuestionDetails> Ques_det;
+
 
 
     @Override
@@ -64,6 +68,7 @@ public class StartTestActivity extends ActionBarActivity {
                 finish();
             }
         });
+
 
 
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +144,8 @@ public class StartTestActivity extends ActionBarActivity {
 
     private void fetchQuestiondetails()
     {
+        Ques_det = new ArrayList<QuestionDetails>();
+
         String temp = Prefs.getString("TestID", "");
         ParseQuery parsequery = ParseQuery.getQuery("Question_details");
         parsequery.whereEqualTo("Test_id", temp);
@@ -152,18 +159,36 @@ public class StartTestActivity extends ActionBarActivity {
                     for (int i = 0; i < parseObjects.size(); i++)
                     {
                         Log.e("quesiotn", String.valueOf(((ParseObject)parseObjects.get(i)).get("Question")));
+                        QuestionDetails newobj =  new QuestionDetails();
+                        newobj.Question = String.valueOf(((ParseObject)parseObjects.get(i)).get("Question"));
+                        newobj.Correct_opt = String.valueOf(((ParseObject)parseObjects.get(i)).get("Correct_opt"));
 
-                        ComplexPreferences complexPreferences1 = ComplexPreferences.getComplexPreferences(StartTestActivity.this, "user_pref", 0);
-                        QuestionDetails temp_user = complexPreferences1.getObject("current_user", QuestionDetails.class);
+                        newobj.Test_id=String.valueOf(((ParseObject)parseObjects.get(i)).get("Test_id"));
+                        newobj.Q_id=String.valueOf(((ParseObject)parseObjects.get(i)).get("Q_id"));
+                        newobj.Q_type=String.valueOf(((ParseObject)parseObjects.get(i)).get("Q_type"));
+                        newobj.optA=String.valueOf(((ParseObject)parseObjects.get(i)).get("optA"));
+                        newobj.optB=String.valueOf(((ParseObject)parseObjects.get(i)).get("optB"));
+                        newobj.optC=String.valueOf(((ParseObject)parseObjects.get(i)).get("optC"));
+                        newobj.optD=String.valueOf(((ParseObject)parseObjects.get(i)).get("optD"));
+                        newobj.Q_audio_url=String.valueOf(((ParseObject)parseObjects.get(i)).get("Q_audio_url"));
+                        newobj.Q_image_url=String.valueOf(((ParseObject)parseObjects.get(i)).get("Q_image_url"));
 
+
+
+                        Ques_det.add(i,newobj);
 
                     }
+
+
                 } else {
                     Log.e("size of exception", e.getMessage());
                 }
             }
 
         });
+
+
+        Log.e("size of questionarra",String.valueOf( Ques_det.size()));
     }
 
     //end of min class
