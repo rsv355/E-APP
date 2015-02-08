@@ -4,25 +4,7 @@
     xmlns:genius="http://schemas.android.com/apk/res-auto"
     android:padding="8dp"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/linearBottom"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <net.qiujuer.genius.widget.GeniusButton
-            android:id="@+id/btnNext"
-            android:text="NEXT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            genius:g_delayClick="true"
-            genius:g_touchEffect="move"
-            genius:g_theme="@array/Marsala"
-            genius:g_touchEffectColor="#ff4181ff" />
-
-
-    </LinearLayout>
 
     <ScrollView
         android:paddingLeft="16dp"
@@ -30,7 +12,6 @@
         android:paddingBottom="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/linearBottom"
         android:fillViewport="false"
         >
 

@@ -1,14 +1,37 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:genius="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
    tools:context=".MainActivity">
 
-    <include layout="@layout/app_bar" />
+    <include layout="@layout/app_bar"/>
+    <LinearLayout
+        android:id="@+id/linearBottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <net.qiujuer.genius.widget.GeniusButton
+            android:id="@+id/btnNext"
+            android:text="NEXT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            genius:g_delayClick="true"
+            genius:g_touchEffect="move"
+            genius:g_theme="@array/Marsala"
+            genius:g_touchEffectColor="#ff4181ff" />
+
+
+    </LinearLayout>
+
 
     <ListView
         android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@id/linearBottom"
         android:layout_height="match_parent"
         android:id="@+id/listview"></ListView>
 
-</LinearLayout>
+</RelativeLayout>

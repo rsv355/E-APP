@@ -109,7 +109,7 @@ public class QuestionActivity extends ActionBarActivity {
              TextView txtOptC = (TextView) convertView.findViewById(R.id.txtOptC);
              TextView txtOptD = (TextView) convertView.findViewById(R.id.txtOptD);
 
-           txtQuestion.setText(""+position+1);
+           txtno.setText(String.valueOf(position+1));
            txtQuestion.setText(values.get(position).Question);
            txtOptA.setText("   "+values.get(position).optA);
            txtOptB.setText("   "+values.get(position).optB);
