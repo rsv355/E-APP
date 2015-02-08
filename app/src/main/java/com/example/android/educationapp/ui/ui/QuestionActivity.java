@@ -3,34 +3,20 @@ package com.example.android.educationapp.ui.ui;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.educationapp.R;
-import com.example.android.educationapp.ui.base.ComplexPreferences;
 import com.example.android.educationapp.ui.base.QuestionDetails;
-import com.example.android.educationapp.ui.base.QuestionMaster;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 
 
 public class QuestionActivity extends ActionBarActivity {
@@ -112,7 +98,7 @@ public class QuestionActivity extends ActionBarActivity {
        @Override
          public View getView(final int position, View convertView, ViewGroup parent) {
              if(convertView == null){
-                 convertView = QuestionActivity.this.getLayoutInflater().inflate(R.layout.item_pickup_points,null);
+                 convertView = QuestionActivity.this.getLayoutInflater().inflate(R.layout.question_activity,null);
              }
 
              TextView txtTitle = (TextView) convertView.findViewById(R.id.txtTitle);

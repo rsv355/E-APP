@@ -33,12 +33,14 @@ public class StartTestActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private GeniusButton btnStart;
     ProgressDialog dialog;
+    public static int i;
     private EditText etPassword;
     private EditText etTestid;
     private ListView listview;
     private TextView txtCounter;
     private QuestionDetails ques_d;
     public static ArrayList<QuestionDetails> Ques_det;
+    int tempParseSize=0;
 
 
 
@@ -98,7 +100,8 @@ public class StartTestActivity extends ActionBarActivity {
         }
            if (etTestid.getText().toString().trim().equalsIgnoreCase(testid) && etPassword.getText().toString().trim().equals(password))
         {
-            processStartCounter();
+            fetchQuestiondetails();
+          //  processStartCounter();
 
         } else {
             Toast.makeText(this, "Wrong Test id", Toast.LENGTH_LONG).show();
@@ -126,7 +129,6 @@ public class StartTestActivity extends ActionBarActivity {
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
             txtCounter.setVisibility(View.VISIBLE);
-            fetchQuestiondetails();
         }
 
         @Override
@@ -144,6 +146,9 @@ public class StartTestActivity extends ActionBarActivity {
 
     private void fetchQuestiondetails()
     {
+
+        dialog= ProgressDialog.show(this,"Please Wait","downloading data from server...",true);
+        dialog.setCancelable(false);
         Ques_det = new ArrayList<QuestionDetails>();
 
         String temp = Prefs.getString("TestID", "");
@@ -156,7 +161,9 @@ public class StartTestActivity extends ActionBarActivity {
 
                 if (e == null) {
                     Log.e("size of question list", String.valueOf(parseObjects.size()));
-                    for (int i = 0; i < parseObjects.size(); i++)
+                    tempParseSize = parseObjects.size();
+
+                    for (i = 0; i < parseObjects.size(); i++)
                     {
                         Log.e("quesiotn", String.valueOf(((ParseObject)parseObjects.get(i)).get("Question")));
                         QuestionDetails newobj =  new QuestionDetails();
@@ -177,8 +184,12 @@ public class StartTestActivity extends ActionBarActivity {
 
                         Ques_det.add(i,newobj);
 
+
                     }
 
+                    dialog.dismiss();
+                    Intent intent = new Intent(StartTestActivity.this,QuestionActivity.class);
+                    startActivity(intent);
 
                 } else {
                     Log.e("size of exception", e.getMessage());
@@ -186,6 +197,9 @@ public class StartTestActivity extends ActionBarActivity {
             }
 
         });
+
+
+
 
 
         Log.e("size of questionarra",String.valueOf( Ques_det.size()));
