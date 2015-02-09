@@ -78,12 +78,25 @@ public class QuestionActivity extends ActionBarActivity {
         pieView.setOnProgressListener(new ProgressPieView.OnProgressListener() {
             @Override
             public void onProgressChanged(int progress, int max) {
-                pieView.setShowText(true);
-                pieView.setText(String.valueOf(progress));
+                int counter = progress;
+                if(progress%35==0){
+                    pieView.setTextSize(28);
+                    pieView.setShowText(true);
+                    pieView.setText(String.valueOf(progress/35));
+                }
+
             }
 
             @Override
             public void onProgressCompleted() {
+                counter+=1;
+                if(counter>=StartTestActivity.Ques_det.size()){
+                    pieView.setTextSize(18);
+                    pieView.setText("Time up");
+                    Toast.makeText(QuestionActivity.this,"Questions are finished :)",Toast.LENGTH_LONG).show();
+                }else {
+                    checkQuestionNo(counter);
+                }
 
             }
         });
@@ -107,7 +120,7 @@ public class QuestionActivity extends ActionBarActivity {
     public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
 
 pieView.setProgress(0);
-pieView.setMax(100);
+pieView.setMax(350);
 pieView.animateProgressFill();
         Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
         listview.setAdapter(adapter);

@@ -34,10 +34,11 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/toolbar"
         android:layout_height="80dp"
-        android:textColor="@color/paylabas_white"
-        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="28sp"
         ppv:ppvInverted="true"
-        android:text="Xml"/>
+        android:text="0"/>
 
     <ListView
         android:layout_width="match_parent"
