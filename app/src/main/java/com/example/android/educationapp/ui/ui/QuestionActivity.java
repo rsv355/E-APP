@@ -74,7 +74,6 @@ public class QuestionActivity extends ActionBarActivity {
         });
 
 
-        pieView.setProgress(100);
 
         pieView.setOnProgressListener(new ProgressPieView.OnProgressListener() {
             @Override
@@ -106,6 +105,10 @@ public class QuestionActivity extends ActionBarActivity {
     }
 
     public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
+
+pieView.setProgress(0);
+pieView.setMax(100);
+pieView.animateProgressFill();
         Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
         listview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
