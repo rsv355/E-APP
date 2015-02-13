@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.QuestionDetails;
 import com.filippudak.ProgressPieView.ProgressPieView;
+import com.pixplicity.easyprefs.library.Prefs;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class QuestionActivity extends ActionBarActivity {
     private ArrayList<QuestionDetails> Ques_det;
     int counter=0;
     net.qiujuer.genius.widget.GeniusCheckBox optA,optB,optC,optD;
+    int time_text,time_image,time_audio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +108,9 @@ public class QuestionActivity extends ActionBarActivity {
         });
 
 
-
+        time_text  =  Integer.valueOf(Prefs.getString("Time_text",""));
+        time_image =  Integer.valueOf(Prefs.getString("Time_image",""));
+        time_audio =  Integer.valueOf(Prefs.getString("Time_audio",""));
 
 
     }
@@ -126,12 +130,10 @@ public class QuestionActivity extends ActionBarActivity {
 
 public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
 
-
-
-pieView.setProgress(0);
-pieView.setMax(350);
-pieView.animateProgressFill();
-
+   /* pieView.setProgress(0);
+    pieView.setMax(350);
+    pieView.animateProgressFill();
+*/
         Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
         listview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -147,8 +149,6 @@ pieView.animateProgressFill();
          public Myadapter(Context context,ArrayList<QuestionDetails> objects,final int counter) {
              this.context = context;
              this.values=objects;
-
-             Log.e("inside", "adapter");
          }
 
 
@@ -201,7 +201,6 @@ pieView.animateProgressFill();
 
 
            //setting the image for image questions
-
 
            if(values.get(position).Q_image_url == null) {
                img.setVisibility(View.GONE);
@@ -262,10 +261,22 @@ pieView.animateProgressFill();
            });
 
 
+           int finaltime=10;
+
+           if(values.get(position).Q_type.equalsIgnoreCase("text")){
+               finaltime=time_text;
+           }
+           else if(values.get(position).Q_type.equalsIgnoreCase("image")){
+               finaltime=time_image;
+           }
+           else if(values.get(position).Q_type.equalsIgnoreCase("audio")){
+               finaltime=time_audio;
+           }
 
 
-
-
+           pieView.setProgress(0);
+           pieView.setMax(finaltime*35);
+           pieView.animateProgressFill();
 
 
 
