@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.QuestionDetails;
 import com.filippudak.ProgressPieView.ProgressPieView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class QuestionActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private ListView listview;
     ProgressDialog dialog;
+    ImageView img;
     net.qiujuer.genius.widget.GeniusButton btnNext;
     com.filippudak.ProgressPieView.ProgressPieView pieView;
     private ArrayList<QuestionDetails> Ques_det;
@@ -125,9 +128,10 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
 
 
 
-    pieView.setProgress(0);
+pieView.setProgress(0);
 pieView.setMax(350);
 pieView.animateProgressFill();
+
         Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
         listview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -171,6 +175,8 @@ pieView.animateProgressFill();
 
            TextView txtno = (TextView) convertView.findViewById(R.id.txtQno);
 
+             img = (ImageView)convertView.findViewById(R.id.img);
+
              TextView txtQuestion = (TextView) convertView.findViewById(R.id.txtQuestion);
              TextView txtOptA = (TextView) convertView.findViewById(R.id.txtOptA);
              TextView txtOptB = (TextView) convertView.findViewById(R.id.txtOptB);
@@ -184,6 +190,7 @@ pieView.animateProgressFill();
            optD = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.d);
 
 
+
            txtno.setText(String.valueOf(counter+1));
            txtQuestion.setText(values.get(position).Question);
            txtOptA.setText("   "+values.get(position).optA);
@@ -191,6 +198,28 @@ pieView.animateProgressFill();
            txtOptC.setText("   "+values.get(position).optC);
            txtOptD.setText("   "+values.get(position).optD);
              //Log.e("value", String.valueOf(values.get(position).getString("playerName")));
+
+
+           //setting the image for image questions
+
+
+           if(values.get(position).Q_image_url == null) {
+               img.setVisibility(View.GONE);
+           }
+           else{
+               img.setVisibility(View.VISIBLE);
+               try {
+
+                   Log.e("full path", String.valueOf(values.get(position).Q_image_url));
+                   Picasso.with(QuestionActivity.this.getBaseContext()).load(values.get(position).Q_image_url).into(img);
+
+               } catch (Exception e) {
+                   Log.e("Execpetion occurs loading profile", e.toString());
+               }
+           }
+
+
+
 
            optA.setOnClickListener(new View.OnClickListener() {
                @Override

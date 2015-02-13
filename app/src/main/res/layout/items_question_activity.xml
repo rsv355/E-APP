@@ -59,10 +59,16 @@
         android:layout_height="wrap_content"
         android:textSize="22sp" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/img"/>
+
 <!-- setting the opetions -->
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_marginTop="20dp"
+           android:layout_marginTop="10dp"
            android:orientation="vertical"
            android:layout_height="wrap_content">
            <!-- OPTION A -->
