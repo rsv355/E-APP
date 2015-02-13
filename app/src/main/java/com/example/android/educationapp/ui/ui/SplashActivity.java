@@ -42,7 +42,6 @@ public class SplashActivity extends Activity {
 
      FrameLayout fram_lay;
     ProgressDialog dialog;
-
     private CircleMenuLayout mCircleMenuLayout;
 
     private String[] mItemTexts = new String[] { "Item 1", "Result", "Item 3",
