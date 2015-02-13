@@ -29,12 +29,13 @@ public class QuestionActivity extends ActionBarActivity {
     com.filippudak.ProgressPieView.ProgressPieView pieView;
     private ArrayList<QuestionDetails> Ques_det;
     int counter=0;
-
+    net.qiujuer.genius.widget.GeniusCheckBox optA,optB,optC,optD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
 
 
         pieView = (com.filippudak.ProgressPieView.ProgressPieView) findViewById(R.id.progressPieViewXml);
@@ -102,6 +103,9 @@ public class QuestionActivity extends ActionBarActivity {
         });
 
 
+
+
+
     }
 
 
@@ -117,9 +121,11 @@ public class QuestionActivity extends ActionBarActivity {
         counter=0;
     }
 
-    public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
+public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
 
-pieView.setProgress(0);
+
+
+    pieView.setProgress(0);
 pieView.setMax(350);
 pieView.animateProgressFill();
         Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
@@ -171,6 +177,13 @@ pieView.animateProgressFill();
              TextView txtOptC = (TextView) convertView.findViewById(R.id.txtOptC);
              TextView txtOptD = (TextView) convertView.findViewById(R.id.txtOptD);
 
+
+           optA = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.a);
+           optB = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.b);
+           optC = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.c);
+           optD = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.d);
+
+
            txtno.setText(String.valueOf(counter+1));
            txtQuestion.setText(values.get(position).Question);
            txtOptA.setText("   "+values.get(position).optA);
@@ -178,6 +191,55 @@ pieView.animateProgressFill();
            txtOptC.setText("   "+values.get(position).optC);
            txtOptD.setText("   "+values.get(position).optD);
              //Log.e("value", String.valueOf(values.get(position).getString("playerName")));
+
+           optA.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   optB.setChecked(false);
+                   optC.setChecked(false);
+                   optD.setChecked(false);
+
+               }
+           });
+
+           optB.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   optA.setChecked(false);
+                   optC.setChecked(false);
+                   optD.setChecked(false);
+
+               }
+           });
+
+           optC.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   optB.setChecked(false);
+                   optA.setChecked(false);
+                   optD.setChecked(false);
+
+               }
+           });
+
+           optD.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   optB.setChecked(false);
+                   optC.setChecked(false);
+                   optA.setChecked(false);
+
+               }
+           });
+
+
+
+
+
+
+
+
+
 
              return  convertView;
          }

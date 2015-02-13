@@ -45,6 +45,7 @@
         android:layout_below="@+id/progressPieViewXml"
         android:layout_above="@id/linearBottom"
         android:layout_height="match_parent"
+        android:footerDividersEnabled="false"
         android:id="@+id/listview"></ListView>
 
 </RelativeLayout>

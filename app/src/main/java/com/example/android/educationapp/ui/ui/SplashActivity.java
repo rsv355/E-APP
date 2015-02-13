@@ -45,8 +45,8 @@ public class SplashActivity extends Activity {
 
     private CircleMenuLayout mCircleMenuLayout;
 
-    private String[] mItemTexts = new String[] { "Item 1 ", "Item 2", "Item 3",
-            "Item 4", "Item 5", "Item 6" };
+    private String[] mItemTexts = new String[] { "Item 1", "Result", "Item 3",
+            "Item 4", "Item 5", "About" };
     private int[] mItemImgs = new int[] { R.drawable.home_mbank_1_normal,
             R.drawable.home_mbank_2_normal, R.drawable.home_mbank_3_normal,
             R.drawable.home_mbank_4_normal, R.drawable.home_mbank_5_normal,

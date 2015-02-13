@@ -35,5 +35,7 @@ dependencies {
     // dependices for themes of button checkbox
     compile 'com.github.qiujuer:genius:2.2.0'
 
+    compile 'com.google.code.gson:gson:2.+'
+
 
 }
