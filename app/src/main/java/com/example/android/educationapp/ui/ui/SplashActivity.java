@@ -80,6 +80,14 @@ public class SplashActivity extends Activity {
             {
                 Toast.makeText(SplashActivity.this, mItemTexts[pos],
                         Toast.LENGTH_SHORT).show();
+                switch (pos){
+                    case 1:
+                        Intent i = new Intent(SplashActivity.this,FinishActivity.class);
+                        startActivity(i);
+
+                        break;
+                }
+
 
             }
 

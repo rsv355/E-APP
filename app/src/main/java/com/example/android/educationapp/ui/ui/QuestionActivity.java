@@ -2,6 +2,7 @@ package com.example.android.educationapp.ui.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -38,6 +39,8 @@ public class QuestionActivity extends ActionBarActivity {
     net.qiujuer.genius.widget.GeniusCheckBox optA,optB,optC,optD;
     int time_text,time_image,time_audio;
     int finaltime=10;
+
+    String selectedOption="NA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +106,9 @@ public class QuestionActivity extends ActionBarActivity {
                     pieView.setTextSize(18);
                     pieView.setText("Time up");
                     Toast.makeText(QuestionActivity.this,"Questions are finished :)",Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(QuestionActivity.this,FinishActivity.class);
+                    startActivity(i);
+                    finish();
                 }else {
                     checkQuestionNo(counter);
                 }
@@ -207,6 +213,7 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
            optA.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
+                   selectedOption="A";
                    optB.setChecked(false);
                    optC.setChecked(false);
                    optD.setChecked(false);
@@ -217,6 +224,7 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
            optB.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
+                   selectedOption="B";
                    optA.setChecked(false);
                    optC.setChecked(false);
                    optD.setChecked(false);
@@ -227,6 +235,7 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
            optC.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
+                   selectedOption="C";
                    optB.setChecked(false);
                    optA.setChecked(false);
                    optD.setChecked(false);
@@ -237,6 +246,7 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
            optD.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
+                   selectedOption="D";
                    optB.setChecked(false);
                    optC.setChecked(false);
                    optA.setChecked(false);
@@ -244,7 +254,7 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
                }
            });
 
-
+            Prefs.putString("option" + position, selectedOption);
 
 
            if(values.get(position).Q_type.equalsIgnoreCase("text")){
@@ -276,7 +286,7 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
 
 
                    } catch (Exception e) {
-                       Log.e("Execpetion occurs loading profile", e.toString());
+                       Log.e("Execpeti loading profile", e.toString());
                    }
                }
 
@@ -298,29 +308,6 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
 
 
      }
-/*
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
-        query.getInBackground("yKD4lpJRzG", new GetCallback<ParseObject>() {
-
-            @Override
-            public void done(List<ParseObject> scoreList, com.parse.ParseException e) {
-
-                if (e == null) {
-                    // object will be your game score
-                  //  String playerName = parseObject.getString("playerName");
-                    Log.e("size of list",String.valueOf(scoreList.size()));
-                } else {
-                    Log.e("player name","no data err");
-                    Log.e("exc",e.toString());
-                    // something went wrong
-                }
-
-
-            }
-        });*/
-
-
-
 
 
     //end of min class

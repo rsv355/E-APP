@@ -31,6 +31,15 @@
             android:name=".ui.ui.StartTestActivity"
             android:label="Quick Quiz" ></activity>
 
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.ui.FinishActivity"
+            android:label="Quick Quiz" ></activity>
+
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.ui.ResultActivity"
+            android:label="Quick Quiz" ></activity>
 
         <activity
             android:screenOrientation="portrait"
