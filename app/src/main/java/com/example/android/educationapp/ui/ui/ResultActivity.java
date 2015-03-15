@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.QuestionDetails;
+import com.pixplicity.easyprefs.library.Prefs;
 
 import net.qiujuer.genius.widget.GeniusButton;
 
@@ -55,6 +56,8 @@ public class ResultActivity extends ActionBarActivity {
         });
 
 
+        TextView txt1 = (TextView)findViewById(R.id.txt1);
+        txt1.setText("value is "+QuestionActivity.selectoption.get(2));
     }
 
 

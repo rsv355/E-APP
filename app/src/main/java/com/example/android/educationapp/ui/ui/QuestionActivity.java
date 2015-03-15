@@ -39,6 +39,7 @@ public class QuestionActivity extends ActionBarActivity {
     net.qiujuer.genius.widget.GeniusCheckBox optA,optB,optC,optD;
     int time_text,time_image,time_audio;
     int finaltime=10;
+    public static ArrayList<String> selectoption=new ArrayList<String>();
 
     String selectedOption="NA";
 
@@ -254,7 +255,9 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
                }
            });
 
-            Prefs.putString("option" + position, selectedOption);
+
+
+           selectoption.add(position,selectedOption);
 
 
            if(values.get(position).Q_type.equalsIgnoreCase("text")){

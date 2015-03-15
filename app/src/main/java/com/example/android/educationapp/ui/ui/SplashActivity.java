@@ -82,7 +82,7 @@ public class SplashActivity extends Activity {
                         Toast.LENGTH_SHORT).show();
                 switch (pos){
                     case 1:
-                        Intent i = new Intent(SplashActivity.this,FinishActivity.class);
+                        Intent i = new Intent(SplashActivity.this,ResultActivity.class);
                         startActivity(i);
 
                         break;
