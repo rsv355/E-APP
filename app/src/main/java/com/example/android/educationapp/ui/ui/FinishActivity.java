@@ -60,7 +60,11 @@ public class FinishActivity extends ActionBarActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+              /*  Intent i = new Intent(FinishActivity.this,SplashActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+          */      finish();
+
             }
         });
 
@@ -68,7 +72,10 @@ public class FinishActivity extends ActionBarActivity {
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onResume() {
