@@ -17,7 +17,7 @@ public class DBAdapter {
    /* public static final String KEY_NAME = "playername";
     public static final String KEY_SCORE = "score";*/
     private static final String TAG = "DBAdapter";
-    private static final String DATABASE_NAME = "MyDB1";
+    private static final String DATABASE_NAME = "EAPP";
 
     private static final String DATABASE_TABLE = "Result";
     private static final int DATABASE_VERSION = 1;
@@ -118,7 +118,7 @@ public class DBAdapter {
         initialValues.put("Answered", Answered);//7
         initialValues.put("UnAnswered", UnAnswered);//8
 
-        Log.e("insert ","ok");
+        Log.e("insert in eapp ","ok");
 
         return db.insert(DATABASE_TABLE, null, initialValues);
     }

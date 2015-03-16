@@ -200,12 +200,17 @@ int total_correct_answer=0;
 int total_wrong_answer=0;
 
     for(int i=0;i<StartTestActivity.Ques_det.size();i++){
+     Log.e("corect answer "+i,""+StartTestActivity.Ques_det.get(i).Correct_opt);
+     Log.e("selection value "+i,""+selectoption.get(i));
+
         if(selectoption.get(i).equalsIgnoreCase("NA")){
+
             total_Unanswerd++;
+            total_wrong_answer++;
         }
         else{
             total_answerd++;
-            if(selectoption.get(i).equalsIgnoreCase(StartTestActivity.Ques_det.get(1).toString())){
+            if(selectoption.get(i).equalsIgnoreCase(StartTestActivity.Ques_det.get(i).Correct_opt)){
                 total_correct_answer++;
             }
             else{
