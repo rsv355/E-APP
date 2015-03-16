@@ -124,14 +124,20 @@ public class QuestionActivity extends ActionBarActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 counter+=1;
+                counter+=1;
                 if(counter>=StartTestActivity.Ques_det.size()){
+                    Log.e("indied if","if");
                     isTestComplete=true;
                     Toast.makeText(QuestionActivity.this,"Wait for time to finish !!!",Toast.LENGTH_LONG).show();
                 }else {
+                    Log.e("indied else","else");
                     isTestComplete=false;
+
                     checkQuestionNo(counter);
+
+
                 }
+
             }
         });
 
@@ -152,9 +158,13 @@ public class QuestionActivity extends ActionBarActivity {
             @Override
             public void onProgressCompleted() {
                 counter+=1;
+
                 if(counter>=StartTestActivity.Ques_det.size()){
                     pieView.setTextSize(18);
                     pieView.setText("Time up");
+
+                    selectoption.add(selectedOption);
+                    Log.e("Select value in time",""+selectedOption);
 
                     insertRecordinDatabase();
 
@@ -166,7 +176,9 @@ public class QuestionActivity extends ActionBarActivity {
                 }else {
                     checkQuestionNo(counter);
 
+
                 }
+
 
             }
         });
@@ -200,17 +212,17 @@ int total_correct_answer=0;
 int total_wrong_answer=0;
 
     for(int i=0;i<StartTestActivity.Ques_det.size();i++){
-     Log.e("corect answer "+i,""+StartTestActivity.Ques_det.get(i).Correct_opt);
+  /*   Log.e("corect answer "+i,""+StartTestActivity.Ques_det.get(i).Correct_opt);
      Log.e("selection value "+i,""+selectoption.get(i));
-
-        if(selectoption.get(i).equalsIgnoreCase("NA")){
+*/
+        if(selectoption.get(i+1).equalsIgnoreCase("NA")){
 
             total_Unanswerd++;
             total_wrong_answer++;
         }
         else{
             total_answerd++;
-            if(selectoption.get(i).equalsIgnoreCase(StartTestActivity.Ques_det.get(i).Correct_opt)){
+            if(selectoption.get(i+1).equalsIgnoreCase(StartTestActivity.Ques_det.get(i).Correct_opt)){
                 total_correct_answer++;
             }
             else{
@@ -416,8 +428,9 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
            });
 
 
+           selectoption.add(selectedOption);
+           Log.e("Select value",""+selectedOption);
 
-           selectoption.add(position,selectedOption);
 
            if(values.get(position).Q_type.equalsIgnoreCase("text")){
                finaltime=time_text;
