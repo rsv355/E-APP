@@ -166,7 +166,8 @@ public class StartTestActivity extends ActionBarActivity {
                     for (i = 0; i < parseObjects.size(); i++)
                     {
                         Log.e("quesiotn", String.valueOf(((ParseObject)parseObjects.get(i)).get("Question")));
-                        QuestionDetails newobj =  new QuestionDetails();
+
+                       QuestionDetails newobj =  new QuestionDetails();
                         newobj.Question = String.valueOf(((ParseObject)parseObjects.get(i)).get("Question"));
                         newobj.Correct_opt = String.valueOf(((ParseObject)parseObjects.get(i)).get("Correct_opt"));
 
