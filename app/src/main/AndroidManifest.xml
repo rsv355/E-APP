@@ -48,6 +48,21 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".ui.ui.SettingsActivity"
+            android:label="Quick Quiz" ></activity>
+
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.ui.FeedbackActivity"
+            android:label="Quick Quiz" ></activity>
+
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.ui.ReportsActivity"
+            android:label="Quick Quiz" ></activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".ui.ui.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Quick Quiz"

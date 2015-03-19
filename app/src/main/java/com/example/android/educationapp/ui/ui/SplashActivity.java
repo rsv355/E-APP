@@ -80,12 +80,32 @@ public class SplashActivity extends Activity {
             {
 
                 switch (pos){
+                    case 0:
+                        Intent i0 = new Intent(SplashActivity.this,FeedbackActivity.class);
+                        startActivity(i0);
+                        break;
                     case 1:
                         Intent i = new Intent(SplashActivity.this,ResultActivity.class);
                         startActivity(i);
 
                         break;
+                    case 2:
+                        Intent i2 = new Intent(SplashActivity.this,SettingsActivity.class);
+                        startActivity(i2);
+                        break;
+                    case 3:
+                        Intent i3 = new Intent(SplashActivity.this,ReportsActivity.class);
+                        startActivity(i3);
+                        break;
                     case 4:
+
+                        String text="Please Check out this amazing Quiz app, \n https://play.google.com/store/apps/details?id=com.quizup.core";
+
+                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                        sharingIntent.setType("text/plain");
+                        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+                       // sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
+                        startActivity(Intent.createChooser(sharingIntent, "Share using"));
 
                         break;
 
