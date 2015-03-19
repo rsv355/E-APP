@@ -44,12 +44,12 @@ public class SplashActivity extends Activity {
     ProgressDialog dialog;
     private CircleMenuLayout mCircleMenuLayout;
 
-    private String[] mItemTexts = new String[] { "Item 1", "Result", "Item 3",
-            "Item 4", "Item 5", "About" };
-    private int[] mItemImgs = new int[] { R.drawable.home_mbank_1_normal,
-            R.drawable.home_mbank_2_normal, R.drawable.home_mbank_3_normal,
-            R.drawable.home_mbank_4_normal, R.drawable.home_mbank_5_normal,
-            R.drawable.home_mbank_6_normal };
+    private String[] mItemTexts = new String[] { "Feedback", "Result", "Settings",
+            "Reports", "Share App", "About Us" };
+    private int[] mItemImgs = new int[] { R.drawable.icon_feedback,
+            R.drawable.icon_result, R.drawable.icon_setting,
+            R.drawable.icon_reports, R.drawable.icon_share,
+            R.drawable.icon_aboutus };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +78,20 @@ public class SplashActivity extends Activity {
             @Override
             public void itemClick(View view, int pos)
             {
-                Toast.makeText(SplashActivity.this, mItemTexts[pos],
-                        Toast.LENGTH_SHORT).show();
+
                 switch (pos){
                     case 1:
                         Intent i = new Intent(SplashActivity.this,ResultActivity.class);
                         startActivity(i);
 
+                        break;
+                    case 4:
+
+                        break;
+
+                    case 5:
+                        Intent i5 = new Intent(SplashActivity.this,AboutusActivity.class);
+                        startActivity(i5);
                         break;
                 }
 
