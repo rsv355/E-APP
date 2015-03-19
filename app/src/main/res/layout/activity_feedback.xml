@@ -5,7 +5,13 @@
     xmlns:genius="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
     <include layout="@layout/app_bar" />
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <net.qiujuer.genius.widget.GeniusEditText
         android:id="@+id/etName"
@@ -74,7 +80,7 @@
         genius:g_touchEffect="move"
         genius:g_theme="@array/Marsala"
         genius:g_touchEffectColor="#ff4181ff" />
-
-
+</LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

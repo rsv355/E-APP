@@ -1,22 +1,43 @@
 package com.example.android.educationapp.ui.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.StrictMode;
+import android.service.textservice.SpellCheckerService;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.example.android.educationapp.R;
+import com.example.android.educationapp.ui.base.GMailSender;
 import com.example.android.educationapp.ui.base.QuestionDetails;
 
+import net.qiujuer.genius.util.Log;
 import net.qiujuer.genius.widget.GeniusButton;
 import net.qiujuer.genius.widget.GeniusEditText;
-
 import java.util.ArrayList;
+import java.util.Properties;
+
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.sql.DataSource;
 
 
 public class FeedbackActivity extends ActionBarActivity {
@@ -32,6 +53,9 @@ public class FeedbackActivity extends ActionBarActivity {
     public static ArrayList<QuestionDetails> Ques_det;
     int tempParseSize=0;
     GeniusEditText etName,etEmail,etFeedback;
+
+    final String username = "softeng.krishna@gmail.com";
+    final String password = "rinkuamit";
 
 
 
@@ -61,17 +85,43 @@ public class FeedbackActivity extends ActionBarActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                processSendMail();
+                if(isOnline()) {
+                    processSendMail();
+                }
             }
         });
     }
 
  void processSendMail(){
 
+     try {
+
+         GMailSender sender = new GMailSender(username, password);
+
+         sender.sendMail("This is Subject",
+                 "This is Body",
+                 "softeng.krishna@gmail.com",
+                 "www.krishnapatel1992@gmail.com");
+         Toast.makeText(FeedbackActivity.this,"Button is clicked",Toast.LENGTH_SHORT).show();
+     } catch (Exception e) {
+         Toast.makeText(FeedbackActivity.this,""+e.toString(),Toast.LENGTH_SHORT).show();
+         Log.e("SendMail",e.toString());
+     }
  }
 
 
-void initView(){
+    public boolean  isOnline() {
+    /*    ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;*/
+        return true;
+    }
+
+    void initView(){
     btnSend = (GeniusButton)findViewById(R.id.btnSend);
     etName = (GeniusEditText)findViewById(R.id.etName);
     etEmail = (GeniusEditText)findViewById(R.id.etEmail);
