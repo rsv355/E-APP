@@ -14,13 +14,14 @@ import com.example.android.educationapp.R;
 import com.example.android.educationapp.ui.base.QuestionDetails;
 
 import net.qiujuer.genius.widget.GeniusButton;
+import net.qiujuer.genius.widget.GeniusEditText;
 
 import java.util.ArrayList;
 
 
 public class FeedbackActivity extends ActionBarActivity {
     private Toolbar toolbar;
-    private GeniusButton btnStart;
+    private GeniusButton btnSend;
     ProgressDialog dialog;
     public static int i;
     private EditText etPassword;
@@ -30,6 +31,7 @@ public class FeedbackActivity extends ActionBarActivity {
     private QuestionDetails ques_d;
     public static ArrayList<QuestionDetails> Ques_det;
     int tempParseSize=0;
+    GeniusEditText etName,etEmail,etFeedback;
 
 
 
@@ -54,13 +56,27 @@ public class FeedbackActivity extends ActionBarActivity {
             }
         });
 
+        initView();
 
-
-
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processSendMail();
+            }
+        });
     }
 
+ void processSendMail(){
+
+ }
 
 
+void initView(){
+    btnSend = (GeniusButton)findViewById(R.id.btnSend);
+    etName = (GeniusEditText)findViewById(R.id.etName);
+    etEmail = (GeniusEditText)findViewById(R.id.etEmail);
+    etFeedback = (GeniusEditText)findViewById(R.id.etFeedback);
+}
 
     @Override
     protected void onResume() {
