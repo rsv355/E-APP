@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.StrictMode;
@@ -28,6 +29,7 @@ import net.qiujuer.genius.widget.GeniusEditText;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.mail.Authenticator;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
@@ -92,21 +94,75 @@ public class FeedbackActivity extends ActionBarActivity {
         });
     }
 
+
  void processSendMail(){
 
-     try {
+     /*new AsyncTask<Void,Void,Void>(){
 
-         GMailSender sender = new GMailSender(username, password);
+         @Override
+         protected Void doInBackground(Void... params) {
+            *//* String to = "www.krishnapatel1992@gmail.com";
 
-         sender.sendMail("This is Subject",
-                 "This is Body",
-                 "softeng.krishna@gmail.com",
-                 "www.krishnapatel1992@gmail.com");
-         Toast.makeText(FeedbackActivity.this,"Button is clicked",Toast.LENGTH_SHORT).show();
-     } catch (Exception e) {
-         Toast.makeText(FeedbackActivity.this,""+e.toString(),Toast.LENGTH_SHORT).show();
-         Log.e("SendMail",e.toString());
-     }
+             String from = "softeng.krishna@gmail.com";
+
+             Properties properties = System.getProperties();
+
+             properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+
+             Session session = Session.getInstance(properties, new Authenticator() {
+                 @Override
+                 protected PasswordAuthentication getPasswordAuthentication() {
+                     return new PasswordAuthentication("softeng.krishna@gmail.com", "rinkuamit");
+                 }
+             });
+
+             try {
+                 MimeMessage message = new MimeMessage(session);
+
+                 message.setFrom(new InternetAddress(from));
+
+                 message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(
+                         to));
+
+                 message.setSubject("This is the Subject Line!");
+
+                 message.setText("This is actual message");
+
+                 Transport.send(message);
+                 System.out.println("Sent message successfully....");
+             } catch (MessagingException mex) {
+                 mex.printStackTrace();
+             }*//*
+
+
+             return null;
+         }
+     }.execute();
+*/
+
+
+
+     runOnUiThread(new Runnable() {
+         @Override
+         public void run() {
+             try {
+
+                 GMailSender sender = new GMailSender("www.krishnapatel1992@gmail.com", "rinkuamit");
+
+                 sender.sendMail("This is Subject",
+                         "This is Body",
+                         "www.krishnapatel1992",
+                         "www.krishnapatel1992");
+                 Toast.makeText(FeedbackActivity.this,"Button is clicked",Toast.LENGTH_SHORT).show();
+             } catch (Exception e) {
+                 Toast.makeText(FeedbackActivity.this,""+e.toString(),Toast.LENGTH_SHORT).show();
+                 Log.e("SendMail",e.toString());
+             }
+         }
+     });
+
+
+
  }
 
 
