@@ -6,6 +6,7 @@
     android:padding="8dp"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <ImageView
@@ -24,7 +25,7 @@
             android:layout_width="match_parent"
             android:text="T101"
             android:textStyle="bold"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="#494949"
             android:layout_height="wrap_content"
             android:id="@+id/txttestID"/>
@@ -33,22 +34,168 @@
         android:layout_width="match_parent"
         android:text="12-15-2015"
         android:textColor="#494949"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:layout_height="wrap_content"
         android:id="@+id/txtdate"/>
 
     </LinearLayout>
-<LinearLayout
-    android:layout_marginRight="10dp"
-    android:gravity="right"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:text="Total Questions :"
+            android:textColor="#494949"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtdate43"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="10"
+                android:textColor="#494949"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdate34"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="Total Questions Answered :"
+                android:textColor="#494949"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdate12"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="10"
+                android:textColor="#494949"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdate23"/>
+        </LinearLayout>
+        <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:text="Total Questions Un-Answered :"
+            android:textColor="#494949"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtdate11"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:paddingTop="5dp"
+            android:layout_width="wrap_content"
+            android:text="10"
+            android:textColor="#494949"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtdate1"/>
+    </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="Total Correct Answer :"
+                android:textColor="#494949"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdate11"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="10"
+                android:textColor="#494949"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdate1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="Total Wrong Answer :"
+                android:textColor="#494949"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdate1f1"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="10"
+                android:textColor="#f9f9f9"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdatef1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:text="Result"
+                android:textColor="#494949"
+                android:textSize="18sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtdate2"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
         <ImageView
-            android:id="@+id/imgPassorFail"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"/>
-</LinearLayout>
+            android:background="@drawable/icon_small_pass"/>
+
+
     </LinearLayout>
 </RelativeLayout>
