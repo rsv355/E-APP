@@ -169,7 +169,7 @@ public class DBAdapter {
         return cursor;
     }
 
-    public Cursor getAllCategory() throws SQLException
+    public Cursor getAllResult() throws SQLException
     {
         String selectQuery = "SELECT * FROM Result";
         Cursor cursor = db.rawQuery(selectQuery, null);
