@@ -75,16 +75,23 @@ public class ReportsActivity extends ActionBarActivity {
         super.onResume();
 
         List<PointValue> values = new ArrayList<PointValue>();
-        values.add(new PointValue(0, 0));
-        values.add(new PointValue(1, 1));
-        values.add(new PointValue(2, 2));
-        values.add(new PointValue(3, 3));
+
+        // (3,6)  ==> 6 is the marks on x axis,,,,,,3 is the marks on y axis
+
+        values.add(new PointValue(0, 10));
+        values.add(new PointValue(1, 15));
+        values.add(new PointValue(2, 9));
+
+   //     values.add(new PointValue(2, 2));
+   //     values.add(new PointValue(3, 6));
 
 
         //In most cased you can call data model methods in builder-pattern-like manner.
         Line line = new Line(values).setColor(Color.BLUE).setShape(ValueShape.CIRCLE).setCubic(true);
         List<Line> lines = new ArrayList<Line>();
         lines.add(line);
+
+
 
         LineChartData data = new LineChartData();
         data.setLines(lines);
@@ -96,9 +103,12 @@ public class ReportsActivity extends ActionBarActivity {
             Axis axisX = new Axis();
             Axis axisY = new Axis().setHasLines(true);
             if (hasAxesNames) {
-                axisX.setName("Axis X");
-                axisY.setName("Axis Y");
+                axisX.setName("Test ID");
+                axisY.setName("Marks");
+
+
             }
+
             data.setAxisXBottom(axisX);
             data.setAxisYLeft(axisY);
         } else {
