@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtdate43"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:paddingTop="5dp"
                 android:layout_width="wrap_content"
@@ -87,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtdate12"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:paddingTop="5dp"
                 android:layout_width="wrap_content"
@@ -114,6 +116,7 @@
         <TextView
             android:layout_marginLeft="10dp"
             android:paddingTop="5dp"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:text="10"
             android:textColor="#494949"
@@ -135,16 +138,17 @@
                 android:textColor="#494949"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtdate11"/>
+                android:id="@+id/txtdatety11"/>
             <TextView
                 android:layout_marginLeft="10dp"
                 android:paddingTop="5dp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:text="10"
-                android:textColor="#494949"
+                android:textColor="#4caf50"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtdate1"/>
+                android:id="@+id/txtdate1uy"/>
         </LinearLayout>
         <LinearLayout
             android:gravity="center"
@@ -164,9 +168,10 @@
             <TextView
                 android:layout_marginLeft="10dp"
                 android:paddingTop="5dp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:text="10"
-                android:textColor="#f9f9f9"
+                android:textColor="#FF0000"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtdatef1"/>
@@ -190,12 +195,18 @@
 
     </LinearLayout>
 
-        <ImageView
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
             android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/icon_small_pass"/>
-
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

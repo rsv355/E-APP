@@ -31,25 +31,28 @@ public class GMailSender extends javax.mail.Authenticator {
         this.user = user;
         this.password = password;
 
-     //   Properties props = new Properties();
-        /*props.setProperty("mail.transport.protocol", "smtp");
+        Properties props = new Properties();
+        props.setProperty("mail.transport.protocol", "smtp");
         props.setProperty("mail.smtp.host", mailhost);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.socketFactory.port", "587");
         props.put("mail.smtp.socketFactory.class",
                 "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
-        props.setProperty("mail.smtp.quitwait", "false");*/
+        props.setProperty("mail.smtp.quitwait", "false");
 
+        session = Session.getDefaultInstance(props, this);
+
+/*
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
+*/
 
-        session = Session.getDefaultInstance(properties, this);
+        session = Session.getDefaultInstance(props, this);
     }
 
     protected PasswordAuthentication getPasswordAuthentication() {

@@ -7,9 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
-import android.os.StrictMode;
-import android.service.textservice.SpellCheckerService;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -20,26 +17,25 @@ import android.widget.Toast;
 
 
 import com.example.android.educationapp.R;
-import com.example.android.educationapp.ui.base.GMailSender;
 import com.example.android.educationapp.ui.base.QuestionDetails;
-
 import net.qiujuer.genius.util.Log;
 import net.qiujuer.genius.widget.GeniusButton;
 import net.qiujuer.genius.widget.GeniusEditText;
 import java.util.ArrayList;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
-import javax.mail.Authenticator;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.sql.DataSource;
 
 
 public class FeedbackActivity extends ActionBarActivity {
@@ -97,73 +93,103 @@ public class FeedbackActivity extends ActionBarActivity {
 
  void processSendMail(){
 
-     /*new AsyncTask<Void,Void,Void>(){
-
-         @Override
-         protected Void doInBackground(Void... params) {
-            *//* String to = "www.krishnapatel1992@gmail.com";
-
-             String from = "softeng.krishna@gmail.com";
-
-             Properties properties = System.getProperties();
-
-             properties.setProperty("mail.smtp.host", "smtp.gmail.com");
-
-             Session session = Session.getInstance(properties, new Authenticator() {
-                 @Override
-                 protected PasswordAuthentication getPasswordAuthentication() {
-                     return new PasswordAuthentication("softeng.krishna@gmail.com", "rinkuamit");
-                 }
-             });
-
-             try {
-                 MimeMessage message = new MimeMessage(session);
-
-                 message.setFrom(new InternetAddress(from));
-
-                 message.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(
-                         to));
-
-                 message.setSubject("This is the Subject Line!");
-
-                 message.setText("This is actual message");
-
-                 Transport.send(message);
-                 System.out.println("Sent message successfully....");
-             } catch (MessagingException mex) {
-                 mex.printStackTrace();
-             }*//*
-
-
-             return null;
-         }
-     }.execute();
-*/
-
-
-
-     runOnUiThread(new Runnable() {
-         @Override
-         public void run() {
-             try {
-
-                 GMailSender sender = new GMailSender("www.krishnapatel1992@gmail.com", "rinkuamit");
-
-                 sender.sendMail("This is Subject",
-                         "This is Body",
-                         "www.krishnapatel1992",
-                         "www.krishnapatel1992");
-                 Toast.makeText(FeedbackActivity.this,"Button is clicked",Toast.LENGTH_SHORT).show();
-             } catch (Exception e) {
-                 Toast.makeText(FeedbackActivity.this,""+e.toString(),Toast.LENGTH_SHORT).show();
-                 Log.e("SendMail",e.toString());
-             }
-         }
-     });
-
-
+      String email = "softeng.krishna@gmail.com";
+      String subject = "hello";
+      String message = "working";
+      sendMail(email, subject, message);
 
  }
+
+    private void sendMail(String email, String subject, String messageBody) {
+        Session session = createSessionObject();
+        try {
+            Message message = createMessage(email, subject, messageBody, session);
+            new SendMailTask().execute(message);
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+    private Message createMessage(String email, String subject, String messageBody, Session session) throws MessagingException, UnsupportedEncodingException {
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("softeng.krishna@gmail.com", "rinkuamit"));
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email, email));
+        message.setSubject(subject);
+        message.setText(messageBody);
+        return message;
+    }
+
+
+    private Session createSessionObject() {
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+
+        return Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("softeng.krishna@gmail.com", "rinkuamit");
+            }
+        });
+    }
+
+
+    private class SendMailTask extends AsyncTask<Message, Void, Void> {
+        private ProgressDialog progressDialog;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(FeedbackActivity.this, "Please wait", "Sending mail", true, false);
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(FeedbackActivity.this,"Feedback Sent Sucessfully :)",Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+        }
+
+
+        @Override
+        protected Void doInBackground(Message... messages) {
+            try {
+                Transport.send(messages[0]);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public boolean  isOnline() {

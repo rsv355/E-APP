@@ -16,6 +16,14 @@ import com.example.android.educationapp.ui.base.QuestionDetails;
 import net.qiujuer.genius.widget.GeniusButton;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.ValueShape;
+import lecho.lib.hellocharts.view.LineChartView;
 
 
 public class ReportsActivity extends ActionBarActivity {
@@ -30,7 +38,9 @@ public class ReportsActivity extends ActionBarActivity {
     private QuestionDetails ques_d;
     public static ArrayList<QuestionDetails> Ques_det;
     int tempParseSize=0;
-
+    lecho.lib.hellocharts.view.LineChartView chart;
+    private boolean hasAxes = true;
+    private boolean hasAxesNames = true;
 
 
     @Override
@@ -53,9 +63,7 @@ public class ReportsActivity extends ActionBarActivity {
                 finish();
             }
         });
-
-
-
+        chart = (lecho.lib.hellocharts.view.LineChartView)findViewById(R.id.chart);
 
     }
 
@@ -65,6 +73,42 @@ public class ReportsActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        List<PointValue> values = new ArrayList<PointValue>();
+        values.add(new PointValue(0, 0));
+        values.add(new PointValue(1, 1));
+        values.add(new PointValue(2, 2));
+        values.add(new PointValue(3, 3));
+
+
+        //In most cased you can call data model methods in builder-pattern-like manner.
+        Line line = new Line(values).setColor(Color.BLUE).setShape(ValueShape.CIRCLE).setCubic(true);
+        List<Line> lines = new ArrayList<Line>();
+        lines.add(line);
+
+        LineChartData data = new LineChartData();
+        data.setLines(lines);
+
+    //    chart.setLineChartData(data);
+
+
+        if (hasAxes) {
+            Axis axisX = new Axis();
+            Axis axisY = new Axis().setHasLines(true);
+            if (hasAxesNames) {
+                axisX.setName("Axis X");
+                axisY.setName("Axis Y");
+            }
+            data.setAxisXBottom(axisX);
+            data.setAxisYLeft(axisY);
+        } else {
+            data.setAxisXBottom(null);
+            data.setAxisYLeft(null);
+        }
+
+        data.setBaseValue(Float.NEGATIVE_INFINITY);
+        chart.setLineChartData(data);
+
 
     }
 
