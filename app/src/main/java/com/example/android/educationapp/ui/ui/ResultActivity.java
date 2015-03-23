@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +40,10 @@ public class ResultActivity extends ActionBarActivity {
     DBAdapter db;
     ArrayList<CurrentTest> resultList=new ArrayList<CurrentTest>();
     Dialog dialog;
+    LinearLayout linearemp;
+    TextView txtTotQuestion,txtQuestAns,txtQuestUnAns,txtQuestCorrAns,txtQuestWronAns;
+
+
 
 
     @Override
@@ -54,6 +60,8 @@ public class ResultActivity extends ActionBarActivity {
             setSupportActionBar(toolbar);
         }
 
+
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +69,24 @@ public class ResultActivity extends ActionBarActivity {
             }
         });
 
+       // linearemp = (LinearLayout)findViewById(R.id.linearemp);
         listResult = (ListView)findViewById(R.id.listResult);
 
+
+        View view = getLayoutInflater().inflate(R.layout.custom_dialog,null);
+
+
+        txtTotQuestion  = (TextView)view.findViewById(R.id.txtTotQuestion);
+        txtQuestAns = (TextView)view.findViewById(R.id.txtQuestAns);
+        txtQuestUnAns = (TextView)view.findViewById(R.id.txtQuestUnAns);
+        txtQuestCorrAns = (TextView)view.findViewById(R.id.txtQuestCorrAns);
+        txtQuestWronAns = (TextView)view.findViewById(R.id.txtQuestWronAns);
+
+        txtTotQuestion.setText("dd");
+
+
+
+        loaddata();
     }
 
 
@@ -88,18 +112,38 @@ public class ResultActivity extends ActionBarActivity {
         }
 
         adapter = new CustomAdapter(ResultActivity.this, resultList);
+
         //adapter.notifyDataSetChanged();
         listResult.setAdapter(adapter);
+
+      /*  if(resultList.size()!=0){
+      //      linearemp.setVisibility(View.GONE);
+        }*/
+
 
 
         listResult.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+               /* txtTotQuestion.setText(""+resultList.get(position).Total_ques);
+                txtQuestAns.setText(""+resultList.get(position).Answered);
+                txtQuestUnAns.setText(""+resultList.get(position).UnAnswered);
+                txtQuestCorrAns.setText(""+resultList.get(position).Correct_ques);
+                txtQuestWronAns.setText(""+resultList.get(position).Wrong_ques);
+*/
+
+
+                txtQuestAns.setText(""+position);
+                txtQuestUnAns.setText(""+position);
+                txtQuestCorrAns.setText(""+position);
+                txtQuestWronAns.setText(""+position);
+
                final Dialog dialog = new Dialog(ResultActivity.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.custom_dialog);
                 dialog.show();
+
             }
         });
 
@@ -126,7 +170,7 @@ public class ResultActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        loaddata();
+
 
     }
 
@@ -176,6 +220,12 @@ public class ResultActivity extends ActionBarActivity {
             else{
                 imgPassorFail.setImageResource(R.drawable.icon_small_fail);
             }
+
+            View view1 = getLayoutInflater().inflate(R.layout.custom_dialog,null);
+            txtTotQuestion  = (TextView)view1.findViewById(R.id.txtTotQuestion);
+            txtTotQuestion.setText("dd");
+
+
 
             return convertView;
         }

@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:text="12-15-2015"
         android:textColor="#494949"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:layout_height="wrap_content"
         android:id="@+id/txtdate"/>
 

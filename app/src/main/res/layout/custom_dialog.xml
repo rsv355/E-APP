@@ -9,11 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/icon"/>
+
 
     <LinearLayout
         android:layout_marginLeft="10dp"
@@ -21,6 +17,20 @@
        android:layout_height="wrap_content"
        android:padding="16dp"
        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/icon"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
             android:text="T101"
@@ -29,14 +39,17 @@
             android:textColor="#494949"
             android:layout_height="wrap_content"
             android:id="@+id/txttestID"/>
-    <TextView
-        android:paddingTop="5dp"
-        android:layout_width="match_parent"
-        android:text="12-15-2015"
-        android:textColor="#494949"
-        android:textSize="14sp"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtdate"/>
+                <TextView
+                    android:paddingTop="5dp"
+                    android:layout_width="match_parent"
+                    android:text="12-15-2015"
+                    android:textColor="#494949"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtdate"/>
+                </LinearLayout>
+            </LinearLayout>
+
 
     </LinearLayout>
 
@@ -65,11 +78,11 @@
                 android:layout_marginLeft="10dp"
                 android:paddingTop="5dp"
                 android:layout_width="wrap_content"
-                android:text="10"
+                android:text="xx"
                 android:textColor="#494949"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtdate34"/>
+                android:id="@+id/txtTotQuestion"/>
         </LinearLayout>
 
         <LinearLayout
@@ -96,7 +109,7 @@
                 android:textColor="#494949"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtdate23"/>
+                android:id="@+id/txtQuestAns"/>
         </LinearLayout>
         <LinearLayout
         android:gravity="center"
@@ -122,7 +135,7 @@
             android:textColor="#494949"
             android:textSize="14sp"
             android:layout_height="wrap_content"
-            android:id="@+id/txtdate1"/>
+            android:id="@+id/txtQuestUnAns"/>
     </LinearLayout>
         <LinearLayout
             android:gravity="center"
@@ -148,7 +161,7 @@
                 android:textColor="#4caf50"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtdate1uy"/>
+                android:id="@+id/txtQuestCorrAns"/>
         </LinearLayout>
         <LinearLayout
             android:gravity="center"
@@ -174,7 +187,7 @@
                 android:textColor="#FF0000"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtdatef1"/>
+                android:id="@+id/txtQuestWronAns"/>
         </LinearLayout>
         <LinearLayout
             android:gravity="center"

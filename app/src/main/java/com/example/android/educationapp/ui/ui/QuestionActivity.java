@@ -29,7 +29,10 @@ import com.pixplicity.easyprefs.library.Prefs;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class QuestionActivity extends ActionBarActivity {
@@ -239,13 +242,21 @@ int total_wrong_answer=0;
     this.Wrong_ques = val6;
     this.Answered = val7;
     this.UnAnswered = val8;
+
 */
+
+
+    DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
+    Date date1 = new Date();
+    String cuurentdate = ""+dateFormat.format(date1);
+
+
     if(isTestComplete) {
 
         if(total_correct_answer>=total_wrong_answer) {
 
             obj.setValues(StartTestActivity.Ques_det.get(0).Test_id,
-                    "12-5-2015",
+                    cuurentdate,
                     "PASS",
                     StartTestActivity.Ques_det.size(),
                     total_correct_answer,
@@ -255,7 +266,7 @@ int total_wrong_answer=0;
         }
         else{
             obj.setValues(StartTestActivity.Ques_det.get(0).Test_id,
-                    "12-5-2015",
+                    cuurentdate,
                     "FAIL",
                     StartTestActivity.Ques_det.size(),
                     total_correct_answer,
