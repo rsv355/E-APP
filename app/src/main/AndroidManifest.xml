@@ -61,6 +61,13 @@
             android:name=".ui.ui.ReportsActivity"
             android:label="Quick Quiz" ></activity>
 
+
+        <activity
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog.FixedSize"
+            android:name=".ui.ui.CustomResultDialogActivity"
+            android:label="Quick Quiz" ></activity>
+
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.ui.SplashActivity"

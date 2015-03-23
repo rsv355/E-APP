@@ -3,6 +3,7 @@ package com.example.android.educationapp.ui.ui;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -38,11 +39,9 @@ public class ResultActivity extends ActionBarActivity {
     ListView listResult;
     public static CustomAdapter adapter;
     DBAdapter db;
-    ArrayList<CurrentTest> resultList=new ArrayList<CurrentTest>();
+    public static  ArrayList<CurrentTest> resultList=new ArrayList<CurrentTest>();
     Dialog dialog;
     LinearLayout linearemp;
-    TextView txtTotQuestion,txtQuestAns,txtQuestUnAns,txtQuestCorrAns,txtQuestWronAns;
-
 
 
 
@@ -73,18 +72,6 @@ public class ResultActivity extends ActionBarActivity {
         listResult = (ListView)findViewById(R.id.listResult);
 
 
-        View view = getLayoutInflater().inflate(R.layout.custom_dialog,null);
-
-
-        txtTotQuestion  = (TextView)view.findViewById(R.id.txtTotQuestion);
-        txtQuestAns = (TextView)view.findViewById(R.id.txtQuestAns);
-        txtQuestUnAns = (TextView)view.findViewById(R.id.txtQuestUnAns);
-        txtQuestCorrAns = (TextView)view.findViewById(R.id.txtQuestCorrAns);
-        txtQuestWronAns = (TextView)view.findViewById(R.id.txtQuestWronAns);
-
-        txtTotQuestion.setText("dd");
-
-
 
         loaddata();
     }
@@ -112,9 +99,9 @@ public class ResultActivity extends ActionBarActivity {
         }
 
         adapter = new CustomAdapter(ResultActivity.this, resultList);
-
-        //adapter.notifyDataSetChanged();
         listResult.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
 
       /*  if(resultList.size()!=0){
       //      linearemp.setVisibility(View.GONE);
@@ -126,23 +113,16 @@ public class ResultActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-               /* txtTotQuestion.setText(""+resultList.get(position).Total_ques);
-                txtQuestAns.setText(""+resultList.get(position).Answered);
-                txtQuestUnAns.setText(""+resultList.get(position).UnAnswered);
-                txtQuestCorrAns.setText(""+resultList.get(position).Correct_ques);
-                txtQuestWronAns.setText(""+resultList.get(position).Wrong_ques);
-*/
 
-
-                txtQuestAns.setText(""+position);
-                txtQuestUnAns.setText(""+position);
-                txtQuestCorrAns.setText(""+position);
-                txtQuestWronAns.setText(""+position);
+                Intent i = new Intent(ResultActivity.this,CustomResultDialogActivity.class);
+                i.putExtra("pos",position);
+                startActivity(i);
+/*
 
                final Dialog dialog = new Dialog(ResultActivity.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.custom_dialog);
-                dialog.show();
+                dialog.show();*/
 
             }
         });
@@ -150,7 +130,7 @@ public class ResultActivity extends ActionBarActivity {
     }
 
     void loaddata(){
-
+        resultList = new ArrayList<CurrentTest>();
         db.open();
         Cursor c = db.getAllResult();
         if (c.moveToFirst()) {
@@ -221,9 +201,7 @@ public class ResultActivity extends ActionBarActivity {
                 imgPassorFail.setImageResource(R.drawable.icon_small_fail);
             }
 
-            View view1 = getLayoutInflater().inflate(R.layout.custom_dialog,null);
-            txtTotQuestion  = (TextView)view1.findViewById(R.id.txtTotQuestion);
-            txtTotQuestion.setText("dd");
+
 
 
 
