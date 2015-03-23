@@ -62,7 +62,9 @@ public class AboutusActivity extends ActionBarActivity {
 
 
 
-        txt1.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+        txt1.setText("Envision is a globally renowned IT Services company dealing in Software development, Web development and designing. Being an experienced technical team.\nEnvision has mastered in ERP solutions, e-Commerce and Web based ERP solutions, Industrial Automation software communicating with Micro controllers and PLCs (Data Acquisition, SCADA) software.\n" +
+                "\n\n" +
+                "Understanding business in a systematic way and providing competitive solutions is passion of Envision team. Being in the industry for more than a decade in development.\nEnvision has expanded its wings to touch unlimited sky of opportunities in IT industry by providing Placement Services and Professional Training Services for Confident Candidates from any field, Engineering students, and existing professional to fine tune their rough edges. ");
         txt1.setSelected(true);
 
 

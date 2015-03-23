@@ -4,11 +4,28 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
     <include layout="@layout/app_bar" />
-    <TextView
-        android:padding="16dp"
-        android:id="@+id/txt1"
-        android:text="Settings page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+  <LinearLayout
+      android:padding="16dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+      <TextView
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:textSize="22sp"
+          android:text="Push Notifications"/>
+      <ToggleButton
+          android:layout_width="60dp"
+          android:layout_height="wrap_content" />
 
+      </LinearLayout>
+
+
+    <TextView
+        android:textSize="22sp"
+        android:padding="16dp"
+        android:text="Version 1.0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
