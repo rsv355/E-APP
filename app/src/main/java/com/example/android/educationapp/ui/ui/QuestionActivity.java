@@ -327,6 +327,7 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
     pieView.setMax(350);
     pieView.animateProgressFill();
 */
+
         Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
         listview.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -441,7 +442,7 @@ public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
 
            selectoption.add(selectedOption);
            Log.e("Select value",""+selectedOption);
-
+           selectedOption="NA";
 
            if(values.get(position).Q_type.equalsIgnoreCase("text")){
                finaltime=time_text;
