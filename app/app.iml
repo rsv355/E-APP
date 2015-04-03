@@ -88,6 +88,7 @@
     <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="additionnal" level="project" />
     <orderEntry type="library" exported="" name="mail" level="project" />
+    <orderEntry type="library" exported="" name="MPAndroidChart-v2.0.8" level="project" />
     <orderEntry type="library" exported="" name="hellocharts-library-1.5.3" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.4.0" level="project" />
