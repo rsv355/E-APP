@@ -33,11 +33,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 
 public class QuestionActivity extends ActionBarActivity {
     private Toolbar toolbar;
-    private ListView listview;
     ProgressDialog dialog;
     ImageView img;
     net.qiujuer.genius.widget.GeniusButton btnNext;
@@ -47,8 +47,9 @@ public class QuestionActivity extends ActionBarActivity {
     net.qiujuer.genius.widget.GeniusCheckBox optA,optB,optC,optD;
     int time_text,time_image,time_audio;
     int finaltime=10;
-    public static ArrayList<String> selectoption=new ArrayList<String>();
-
+    public static HashMap<Integer,String> optionlist = new HashMap<Integer,String>();
+    public static ArrayList<String> selectoptionlist=new ArrayList<String>();
+    TextView txtQuestion,txtOptA,txtOptB,txtOptC,txtOptD,txtno;
     String selectedOption="NA";
     DBAdapter db;
     boolean isTestComplete =false;
@@ -101,11 +102,21 @@ public class QuestionActivity extends ActionBarActivity {
 
 
         pieView = (com.filippudak.ProgressPieView.ProgressPieView) findViewById(R.id.progressPieViewXml);
-        listview = (ListView) findViewById(R.id.listview);
         btnNext = (net.qiujuer.genius.widget.GeniusButton)findViewById(R.id.btnNext);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(Color.parseColor("#3D3427"));
         toolbar.setNavigationIcon(R.drawable.icon_back);
+
+        txtno = (TextView) findViewById(R.id.txtQno);
+        txtQuestion = (TextView) findViewById(R.id.txtQuestion);
+        txtOptA = (TextView) findViewById(R.id.txtOptA);
+        txtOptB = (TextView) findViewById(R.id.txtOptB);
+        txtOptC = (TextView) findViewById(R.id.txtOptC);
+        txtOptD = (TextView) findViewById(R.id.txtOptD);
+        optA = (net.qiujuer.genius.widget.GeniusCheckBox) findViewById(R.id.a);
+        optB = (net.qiujuer.genius.widget.GeniusCheckBox) findViewById(R.id.b);
+        optC = (net.qiujuer.genius.widget.GeniusCheckBox) findViewById(R.id.c);
+        optD = (net.qiujuer.genius.widget.GeniusCheckBox) findViewById(R.id.d);
 
 
         if (toolbar != null) {
@@ -116,35 +127,106 @@ public class QuestionActivity extends ActionBarActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(QuestionActivity.this);
+                alertDialog.setTitle("Warning");
+
+                // Setting Dialog Message
+                alertDialog.setMessage("Would you like to cancel this test ?\nCurrent test data will be lost!!!");
+
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+
+                        Intent i = new Intent(QuestionActivity.this,StartTestActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+
+
+                    }
+                });
+
+                // Setting Negative "NO" Button
+                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to invoke NO event
+
+                    }
+                });
+
+                // Showing Alert Message
+                alertDialog.show();
             }
         });
 
-        viewdata(StartTestActivity.Ques_det);
 
-        checkQuestionNo(counter);
+        optionlist = new HashMap<Integer,String>();
+        setupQuestion(counter);
+
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(optionlist.get(counter)==null){
+                    optionlist.put(counter, "NA");
+                }
+
+
                 counter+=1;
                 if(counter>=StartTestActivity.Ques_det.size()){
-                    Log.e("indied if","if");
-                    isTestComplete=true;
-                    Toast.makeText(QuestionActivity.this,"Wait for time to finish !!!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(QuestionActivity.this,"Please wait for Questions to finished",Toast.LENGTH_LONG).show();
+
                 }else {
-                    Log.e("indied else","else");
-                    isTestComplete=false;
-
-                    checkQuestionNo(counter);
-
-
+                        setupQuestion(counter);
                 }
 
             }
         });
 
+        optA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                selectedOption="A";
+                optB.setChecked(false);
+                optC.setChecked(false);
+                optD.setChecked(false);
+                optionlist.put(counter, "A");
+            }
+        });
+
+        optB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectedOption="B";
+                optA.setChecked(false);
+                optC.setChecked(false);
+                optD.setChecked(false);
+                optionlist.put(counter, "B");
+            }
+        });
+        optC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectedOption="C";
+                optB.setChecked(false);
+                optA.setChecked(false);
+                optD.setChecked(false);
+                optionlist.put(counter, "C");
+            }
+        });
+        optD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectedOption="D";
+                optB.setChecked(false);
+                optC.setChecked(false);
+                optA.setChecked(false);
+                optionlist.put(counter, "D");
+            }
+        });
 
         pieView.setOnProgressListener(new ProgressPieView.OnProgressListener() {
             @Override
@@ -160,46 +242,29 @@ public class QuestionActivity extends ActionBarActivity {
 
             @Override
             public void onProgressCompleted() {
-                counter+=1;
 
-                if(counter>=StartTestActivity.Ques_det.size()){
-                    pieView.setTextSize(18);
-                    pieView.setText("Time up");
-
-                    selectoption.add(selectedOption);
-                    Log.e("Select value in time",""+selectedOption);
-
-                    insertRecordinDatabase();
-
-
-                    Toast.makeText(QuestionActivity.this,"Questions are finished :)",Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(QuestionActivity.this,FinishActivity.class);
-                    startActivity(i);
-                    finish();
-                }else {
-                    checkQuestionNo(counter);
-
-
+                if(optionlist.get(counter)==null){
+                    optionlist.put(counter, "NA");
                 }
 
 
+                counter+=1;
+                if(counter>=StartTestActivity.Ques_det.size()){
+                     processFinish();
+                }else {
+                    setupQuestion(counter);
+                }
             }
         });
 
 
-        time_text  =  Integer.valueOf(Prefs.getString("Time_text",""));
-        time_image =  Integer.valueOf(Prefs.getString("Time_image", ""));
-        time_audio =  Integer.valueOf(Prefs.getString("Time_audio", ""));
+
 
 
     }
 
 
-    public void checkQuestionNo(final int qno ){
-        ArrayList<QuestionDetails> newObj = new ArrayList<QuestionDetails>(1);
-        newObj.add(StartTestActivity.Ques_det.get(counter));
-        viewdata(newObj);
-    }
+
 
     @Override
     protected void onResume() {
@@ -208,50 +273,39 @@ public class QuestionActivity extends ActionBarActivity {
     }
 
 
-public void insertRecordinDatabase(){
-int total_answerd=0;
-int total_Unanswerd=0;
-int total_correct_answer=0;
-int total_wrong_answer=0;
+    private void processInsertinDatabase(){
+        int total_answerd=0;
+        int total_Unanswerd=0;
+        int total_correct_answer=0;
+        int total_wrong_answer=0;
 
-    for(int i=0;i<StartTestActivity.Ques_det.size();i++){
+        for(int i=0;i<optionlist.size();i++){
+            Log.e("Values:-",optionlist.get(i));
+        }
+
+        for(int i=0;i<StartTestActivity.Ques_det.size();i++){
   /*   Log.e("corect answer "+i,""+StartTestActivity.Ques_det.get(i).Correct_opt);
      Log.e("selection value "+i,""+selectoption.get(i));
 */
-        if(selectoption.get(i+1).equalsIgnoreCase("NA")){
+            if(optionlist.get(i).equalsIgnoreCase("NA")){
 
-            total_Unanswerd++;
-            total_wrong_answer++;
-        }
-        else{
-            total_answerd++;
-            if(selectoption.get(i+1).equalsIgnoreCase(StartTestActivity.Ques_det.get(i).Correct_opt)){
-                total_correct_answer++;
-            }
-            else{
+                total_Unanswerd++;
                 total_wrong_answer++;
             }
+            else{
+                total_answerd++;
+                if(optionlist.get(i).equalsIgnoreCase(StartTestActivity.Ques_det.get(i).Correct_opt)){
+                    total_correct_answer++;
+                }
+                else{
+                    total_wrong_answer++;
+                }
+            }
         }
-    }
 
-   /* this.Test_id = val1;
-    this.Test_date = val2;
-    this.Result = val3;
-    this.Total_ques = val4;
-    this.Correct_ques = val5;
-    this.Wrong_ques = val6;
-    this.Answered = val7;
-    this.UnAnswered = val8;
-
-*/
-
-
-    DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
-    Date date1 = new Date();
-    String cuurentdate = ""+dateFormat.format(date1);
-
-
-    if(isTestComplete) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
+        Date date1 = new Date();
+        String cuurentdate = ""+dateFormat.format(date1);
 
         if(total_correct_answer>=total_wrong_answer) {
 
@@ -274,20 +328,9 @@ int total_wrong_answer=0;
                     total_answerd,
                     total_Unanswerd);
         }
-    }
 
-/*    initialValues.put("Test_id", Test_id);//1
-    initialValues.put("Test_date", Test_date);//2
-    initialValues.put("Result", Result);//3
-    initialValues.put("Total_ques", Total_ques);//4
 
-    initialValues.put("Correct_ques", Correct_ques);//5
-    initialValues.put("Wrong_ques", Wrong_ques);//6
 
-    initialValues.put("Answered", Answered);//7
-    initialValues.put("UnAnswered", UnAnswered);//8*/
-
-    if(isTestComplete) {
         db.open();
         db.insertRecord(String.valueOf(obj.Test_id),
                 String.valueOf(obj.Test_date),
@@ -298,203 +341,65 @@ int total_wrong_answer=0;
                 String.valueOf(obj.Answered),
                 String.valueOf(obj.UnAnswered));
         db.close();
-    }
-//    isTestComplete=true;
-
-    /*db.open();
-    db.deleteRecord();
-    for (int i = 0; i < parseObject.size(); i++) {
-
-        db.insertRecord(parseObject.get(i).getString("CATG_ID"), parseObject.get(i).getString("WORD"), parseObject.get(i).getString("PRON_ENG")
-                , parseObject.get(i).getString("MEANING_HIN"), parseObject.get(i).getString("MEANING2"), parseObject.get(i).getString("MEANING3")
-                , parseObject.get(i).getString("MEANING4"), parseObject.get(i).getString("MEANING5"), parseObject.get(i).getString("EX1")
-                , parseObject.get(i).getString("EX2"), parseObject.get(i).getString("EX3"), parseObject.get(i).getString("EX4")
-                , parseObject.get(i).getString("EX5"), parseObject.get(i).getString("MATCH1"), parseObject.get(i).getString("MATCH2")
-                , parseObject.get(i).getString("MATCH3"), parseObject.get(i).getString("MATCH4"), parseObject.get(i).getString("MATCH5")
-                , parseObject.get(i).getString("HIN_EX1"), parseObject.get(i).getString("HIN_EX2"), parseObject.get(i).getString("HIN_EX3")
-                , parseObject.get(i).getString("HIN_EX4"), parseObject.get(i).getString("HIN_EX5")
-        );
-        //   db.insertContact("dd",3);
-    }
-
-    db.close();*/
-}
-
-
-public void viewdata(ArrayList<QuestionDetails> Ques_detlobjects) {
-
-   /* pieView.setProgress(0);
-    pieView.setMax(350);
-    pieView.animateProgressFill();
-*/
-
-        Myadapter adapter = new Myadapter(QuestionActivity.this,Ques_detlobjects,counter);
-        listview.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
 
     }
 
-   public class Myadapter extends BaseAdapter{
 
-         Context context;
-         int layoutResourceId;
-         ArrayList<QuestionDetails> values;
+    private void processFinish(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(QuestionActivity.this);
+        alertDialog.setTitle("Quic Quiz");
+        alertDialog.setCancelable(false);
 
-         public Myadapter(Context context,ArrayList<QuestionDetails> objects,final int counter) {
-             this.context = context;
-             this.values=objects;
-         }
+        // Setting Dialog Message
+        alertDialog.setMessage("Test is Complete");
 
-
-       @Override
-       public int getCount() {
-           return values.size();
-       }
-
-       @Override
-       public Object getItem(int position) {
-           return null;
-       }
-
-       @Override
-       public long getItemId(int position) {
-           return position;
-       }
-
-       @Override
-         public View getView(final int position, View convertView, ViewGroup parent) {
-             if(convertView == null){
-                 convertView = QuestionActivity.this.getLayoutInflater().inflate(R.layout.items_question_activity,null);
-             }
-
-           TextView txtno = (TextView) convertView.findViewById(R.id.txtQno);
-
-             img = (ImageView)convertView.findViewById(R.id.img);
-
-             TextView txtQuestion = (TextView) convertView.findViewById(R.id.txtQuestion);
-             TextView txtOptA = (TextView) convertView.findViewById(R.id.txtOptA);
-             TextView txtOptB = (TextView) convertView.findViewById(R.id.txtOptB);
-             TextView txtOptC = (TextView) convertView.findViewById(R.id.txtOptC);
-             TextView txtOptD = (TextView) convertView.findViewById(R.id.txtOptD);
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
 
 
-           optA = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.a);
-           optB = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.b);
-           optC = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.c);
-           optD = (net.qiujuer.genius.widget.GeniusCheckBox)convertView. findViewById(R.id.d);
+                processInsertinDatabase();
+
+
+                Intent i = new Intent(QuestionActivity.this,FinishActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+
+
+            }
+        });
 
 
 
-           txtno.setText(String.valueOf(counter+1));
-           txtQuestion.setText(values.get(position).Question);
-           txtOptA.setText("   "+values.get(position).optA);
-           txtOptB.setText("   "+values.get(position).optB);
-           txtOptC.setText("   "+values.get(position).optC);
-           txtOptD.setText("   "+values.get(position).optD);
-             //Log.e("value", String.valueOf(values.get(position).getString("playerName")));
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+
+    private void setupQuestion(int counter){
+
+
+        pieView.setProgress(0);
+        pieView.setMax(finaltime*35);
+        pieView.animateProgressFill();
+
+        txtQuestion.setText(StartTestActivity.Ques_det.get(counter).Question.trim());
+        txtno.setText(""+(counter+1));
+        txtOptA.setText(StartTestActivity.Ques_det.get(counter).optA.trim());
+        txtOptB.setText(StartTestActivity.Ques_det.get(counter).optB.trim());
+        txtOptC.setText(StartTestActivity.Ques_det.get(counter).optC.trim());
+        txtOptD.setText(StartTestActivity.Ques_det.get(counter).optD.trim());
+
+        optA.setChecked(false);
+        optB.setChecked(false);
+        optC.setChecked(false);
+        optD.setChecked(false);
+
+
+    }
 
 
 
-           optA.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   selectedOption="A";
-                   optB.setChecked(false);
-                   optC.setChecked(false);
-                   optD.setChecked(false);
-
-               }
-           });
-
-           optB.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   selectedOption="B";
-                   optA.setChecked(false);
-                   optC.setChecked(false);
-                   optD.setChecked(false);
-
-               }
-           });
-
-           optC.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   selectedOption="C";
-                   optB.setChecked(false);
-                   optA.setChecked(false);
-                   optD.setChecked(false);
-
-               }
-           });
-
-           optD.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   selectedOption="D";
-                   optB.setChecked(false);
-                   optC.setChecked(false);
-                   optA.setChecked(false);
-
-               }
-           });
-
-
-           selectoption.add(selectedOption);
-           Log.e("Select value",""+selectedOption);
-           selectedOption="NA";
-
-           if(values.get(position).Q_type.equalsIgnoreCase("text")){
-               finaltime=time_text;
-           }
-    /*       else if(values.get(position).Q_type.equalsIgnoreCase("image")){
-                //setting the image for image questions
-               if(values.get(position).Q_image_url == null) {
-                   img.setVisibility(View.GONE);
-               }
-               else{
-                   img.setVisibility(View.VISIBLE);
-                   *//*try {
-
-                       Log.e("full path", String.valueOf(values.get(position).Q_image_url));
-                       Picasso.with(QuestionActivity.this.getBaseContext()).load(values.get(position).Q_image_url).priority(Picasso.Priority.HIGH).into(img,new Callback(){
-
-                           @Override
-                           public void onSuccess() {
-                               finaltime=time_image;
-                               Log.e("Piccaso","image loded sucesfullY");
-                           }
-
-                           @Override
-                           public void onError() {
-
-                           }
-                       });
-
-
-                   } catch (Exception e) {
-                       Log.e("Execpeti loading profile", e.toString());
-                   }*//*
-               }
-
-           }
-           else if(values.get(position).Q_type.equalsIgnoreCase("audio")){
-               finaltime=time_audio;
-           }*/
-
-
-           pieView.setProgress(0);
-           pieView.setMax(finaltime*35);
-           pieView.animateProgressFill();
-
-
-
-
-             return  convertView;
-         }
-
-
-     }
 
 
     //end of min class
